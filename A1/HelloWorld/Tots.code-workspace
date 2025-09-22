@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../H2"
+		},
+		{
+			"path": "../h3"
+		},
+		{
+			"path": "../Variables/VariablesJava"
+		}
+	],
+	"settings": {}
+}

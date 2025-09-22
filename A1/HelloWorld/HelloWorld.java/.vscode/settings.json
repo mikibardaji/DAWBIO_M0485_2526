@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "editor.minimap.enabled": false,
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ],
+    "workbench.sideBar.location": "right"
+}
