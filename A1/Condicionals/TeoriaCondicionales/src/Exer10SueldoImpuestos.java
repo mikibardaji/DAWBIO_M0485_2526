@@ -15,11 +15,11 @@ public class Exer10SueldoImpuestos {
         
         double salarionet; 
         /*salario sin impuestos */
-        if (horas<130)
+        if (horas<=130)
         {
            salario= horas *SALARIO_HORA;
         }
-        else if (horas>130)
+        else // if (horas>130)
         { //•	Les hores que passin de 130 es paguen a 1,5 vegades la tarifa normal.
             horas_extra = horas - 130;
             salario=horas_extra*SALARIO_HORA*1.5;
@@ -42,26 +42,20 @@ public class Exer10SueldoImpuestos {
             System.out.println("El salario final es " + salarionet);
             System.out.println("Tienes que pagar " + tassas + "de tassas");
         }
-        else if (salario>900)
+        else // if (salario>900)
         {
             tassas=(salario-900)*0.45;
            // salarionet=salario-tassas; //tassas que superan el 900
             double tasas_500_900 = 400 * 0.25;
             tassas = tassas + tasas_500_900;
-            salarionet = salarionet - tassas;
-            System.out.println("El salario neto es " + salarionet);
+            salario = salario - tassas;
+            System.out.println("El salario neto es " + salario);
             System.out.println("Tienes que pagar " + tassas + "de tassas");
 
         }
         
         salario=horas*15;
-
-        }    
-
-
-
-
-
-
-    }
+        sc.close();
+        }   
 }
+
