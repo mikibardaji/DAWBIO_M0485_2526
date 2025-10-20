@@ -21,37 +21,44 @@ public class Ex14OrdinadorAdivinaNumero {
     public static void main(String[] args) {
         Random rd = new Random();
         Scanner sc = new Scanner(System.in);
-        int ordinador_numero;
+        int ordinador_numero, contador=0;
         char resposta;
         int valor_minim=1, valor_maxim = 101;
         //ordinador diu un numero entre 1 i 100
         do{
-        ordinador_numero = rd.nextInt(valor_minim, valor_maxim);
-        System.out.println("He pensat el " + ordinador_numero);
-        System.out.print("He encertat igual(=), mes gran(+) o mes petit(-)? ");
-        resposta = sc.next().charAt(0);
-        
-        switch(resposta)
-        {
-            case '=': ////si has encertat = , ok has encertat
-                System.out.println("Has encertat");
-                break;
-            case '+':
-                //si el numero es mes gran
-                //llavors el minim sera el numero que t'ha dit mes un 
-                valor_minim = ordinador_numero + 1;
-                break;
-            case '-': // 
-                valor_maxim = ordinador_numero;
-                break;
-            default:
-                System.out.println("Opcio incorrecta");
-                break;
-               
-        }
-        }while(resposta!='=');
+            ordinador_numero = rd.nextInt(valor_minim, valor_maxim);
+            System.out.println("He pensat el " + ordinador_numero);
+            contador++;
+            System.out.print("He encertat igual(=), mes gran(+) o mes petit(-)? ");
+            resposta = sc.next().charAt(0);   
+            switch(resposta)
+                {
+                    case '=': ////si has encertat = , ok has encertat
+//                        System.out.println("Has encertat");
+                        break;
+                    case '+':
+                        //si el numero es mes gran
+                        //llavors el minim sera el numero que t'ha dit mes un 
+                        valor_minim = ordinador_numero + 1;
+                        break;
+                    case '-': // 
+                        valor_maxim = ordinador_numero;
+                        break;
+                    default:
+                        System.out.println("Opcio incorrecta");
+                        break;       
+                }
+        }while(resposta!='=' && contador<6);
 
-        System.out.println("Fi de programa");
+        if (resposta=='=')
+        {
+            System.out.println("Ganaste");
+        }
+        else
+        {
+            System.out.println("Perdiste");
+        }
+        //System.out.println("Numero de intents ... " + contador);
         
         //si el numero es mes petit 
              //llavors el maxim ha de ser el numero que t'hagi ordenat (-1)
