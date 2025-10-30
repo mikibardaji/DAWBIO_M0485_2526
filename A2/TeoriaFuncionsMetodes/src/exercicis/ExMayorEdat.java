@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author mabardaji
  */
-public class MayorEdat {
+public class ExMayorEdat {
 
     /**
      * 2.	Programa que demana a l’usuari una edat i indica si és major
@@ -41,7 +41,6 @@ public class MayorEdat {
             //return false;
             mayor=false;
         }
-        
         return mayor;
     }
     

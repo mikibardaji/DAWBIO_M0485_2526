@@ -17,18 +17,15 @@ public class Ex1Funcions {
      * el mètode double producte(double x, double y), el qual retorna el producte dels arguments passats com a paràmetres.
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        
         double num1, num2, resultado;
-        
-        /*System.out.print("Pon el numero 1: ");
-        
-        num1= sc.nextDouble();*/
-        num1 = pedirNumero(1);
-        num2= pedirNumero(2);
+     
+        num1 = pedirNumeroPositivo(1);
+        num2= pedirNumeroPositivo(2);
         
         resultado = producte(num1, num2);
         
-        System.out.println("La multiplicación es " + resultado);
+        mostrarResultado(resultado);
 
     }
     
@@ -38,12 +35,19 @@ public class Ex1Funcions {
         return multi;
     }
     
-    public static double pedirNumero(int x)
+    public static double pedirNumeroPositivo(int x)
     {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Pon el numero " + x + " :");
-        double valor = sc.nextDouble();
+        double valor;
+        do{
+            System.out.print("Pon el numero " + x + " positivo:");
+            valor = sc.nextDouble();
+        }while(valor<0);
         return valor;
     }
     
+    public static void mostrarResultado(double x)
+    {
+        System.out.println("La multiplicación es " + x);
+    }    
 }
