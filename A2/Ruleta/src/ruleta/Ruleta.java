@@ -18,8 +18,35 @@ public class Ruleta {
      * @param args Arguments de línia d'ordres (no utilitzats).
      */
     public static void main(String[] args) { 
-    
-        //System.out.println(resultatJugada(0, 10, 20, 6));
+        int saldo=0, diners_aposta, tipus_aposta, bola_bombo;
+        
+        saldo = AfegirPunts(saldo); //recarga Dinero
+        diners_aposta = QuantitatAposta(); //decideixo quant vull apostar
+        //bucle
+        while (saldo>0 && diners_aposta!=0) //si tens saldo i no vols sortir(0)
+        {
+            if (apostaPunts(saldo, diners_aposta)) /*si es -1 no tens prou diners*/
+            {
+                System.out.println("No pots apostar " + diners_aposta +
+                " el teu saldo es de " + saldo);
+            }
+            else
+            { //joc 
+                tipus_aposta = tipusAposta(); //trio bola
+                bola_bombo = bola(); //surt la bola
+                pintaAsterisc(bola_bombo); //visualitzció grafica
+                saldo = resultatJugada(tipus_aposta, saldo, diners_aposta, bola_bombo);                
+            }
+            if (saldo>0)
+            {
+                System.out.println("Tienes : " + saldo);
+                diners_aposta = QuantitatAposta();
+            }  
+        }
+        
+        System.out.println("T'en vas a casa amb -> " + saldo);
+        
+        
        // pintaAsterisc(5);
     }
 
@@ -122,14 +149,17 @@ public class Ruleta {
      * @param puntsAposta Quantitat de punts que vol apostar.
      * @return int Retorna -1 si no pot apostar, o el valor apostat si és vàlid.
      */
-    public static int apostaPunts(int puntsTotal,int puntsAposta)
+    public static boolean apostaPunts(int puntsTotal,int puntsAposta)
     {
+        
         if (puntsAposta > puntsTotal || puntsAposta < 0) {
-            return -1; /*no pot fer l'aposta*/
+            
+            return true; /*no pot fer l'aposta*/
         }
         else
         {
-            return puntsAposta;
+            
+            return false;
         }
     }
 
@@ -149,10 +179,11 @@ public class Ruleta {
     public static int resultatJugada(int tipusAposta,int saldo,int puntsAposta, int bola){
       if((tipusAposta == -2 && bola%2==0) || (tipusAposta == -1 && bola%2!=0)){
           System.out.println("Has ganado el doble");
-         saldo += puntsAposta * 2;
+         saldo += puntsAposta;  //no fas el doble, perque una part es lo que tens al saldo sino 
+         //guanyaries realment el doble 
       } else if (tipusAposta == bola){
           System.out.println("Has ganado 36 veces mas");
-           saldo += puntsAposta * 36;
+           saldo += puntsAposta * 35; //el 36, es el dineor que ya tienes al saldo
       } else {
           System.out.println("Has perdido");
          saldo -=puntsAposta;
