@@ -4,6 +4,9 @@
  */
 package ruleta;
 
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  *
  * @author mabardaji
@@ -14,22 +17,45 @@ public class Ruleta {
     /**
      * @param args Arguments de línia d'ordres (no utilitzats).
      */
-    public static void main(String[] args) { }
+    public static void main(String[] args) { 
+    
+        //System.out.println(resultatJugada(0, 10, 20, 6));
+       // pintaAsterisc(5);
+    }
 
     /**
      * Funció QuantitatAposta: Demana per teclat quina quantitat vol apostar.
      * Validar que no sigui numero negatiu
      * @return int Quantitat que vol apostar, o 0 si no vol apostar més.
      */
-    public static int QuantitatAposta() { return 0;}
-
+    public static int QuantitatAposta() 
+    {
+            Scanner entrada = new Scanner(System.in);
+        int aposta;
+        do {
+            System.out.print("Quant vols apostar? ");
+            aposta = entrada.nextInt();
+        } while (aposta < 0);
+        return aposta;            
+}     
+            
     /**
      * Funció AfegirPunts: Demana per teclat quants punts volem afegir al saldo.
      * 
      * @param saldo Saldo actual del jugador.
      * @return int Retorna el saldo actual més els punts afegits.
      */
-    public static int AfegirPunts(int saldo) { return 0; }
+    public static int AfegirPunts(int saldo) {
+        Scanner sc = new Scanner(System.in);
+        int afegir;
+        
+        do{
+            System.out.print("Introduce cuántos puntos quieres añadir(Pon numero positivo): ");
+            afegir= sc.nextInt();
+        }while(afegir<=0); 
+        saldo += afegir;
+        return saldo;
+    }
 
     /**
      * Funció pintaAsterisc: rep un número enter i imprimeix per pantalla
@@ -37,8 +63,13 @@ public class Ruleta {
      * 
      * @param numero Enter que indica el nombre d'asteriscs a mostrar.
      */
-    public static void pintaAsterisc(int numero) { 
-    
+    public static void pintaAsterisc(int numero){
+        for(int i=0;i<numero;i++){
+            System.out.print("*");
+        }
+        System.out.println("->" + numero);
+
+
     }
 
     /**
@@ -47,8 +78,15 @@ public class Ruleta {
      * 
      * @return int Número aleatori entre 0 i 36.
      */
-    public static int bola() {
-    return 0;}
+    private static int bola(){
+        
+        Random rd = new Random();
+        
+        int bola = rd.nextInt(0, 37);
+        
+        return bola;
+        
+    }
 
     /**
      * Funció tipusAposta: demana a l’usuari quin tipus d’aposta vol fer.
@@ -59,8 +97,22 @@ public class Ruleta {
      * - -1 ? aposta a SENAR  
      * - 1..36 ? aposta per un número concret
      */
-    public static int tipusAposta() {
-    return 0;}
+     public static int tipusAposta() {
+         Scanner sc = new Scanner(System.in);
+        int tipus;
+        System.out.println("\n--- Tipus d'aposta ---");
+        System.out.println("-2 ? Parell");
+        System.out.println("-1 ? Senar");
+        System.out.println("1–36 ? Número específic");
+        do {
+            System.out.print("Tria la teva opció: ");
+            tipus = sc.nextInt();
+            if (tipus < -2 || tipus > 36) {
+                System.out.println("Opció no vàlida, torna-ho a provar.");
+            }
+        } while (tipus < -2 || tipus > 36 || tipus == 0);
+        return tipus;
+    }
 
     /**
      * Funció apostaPunts: comprova si l’usuari pot apostar
@@ -70,7 +122,16 @@ public class Ruleta {
      * @param puntsAposta Quantitat de punts que vol apostar.
      * @return int Retorna -1 si no pot apostar, o el valor apostat si és vàlid.
      */
-    public static int apostaPunts(int puntsTotal, int puntsAposta) { return 0;}
+    public static int apostaPunts(int puntsTotal,int puntsAposta)
+    {
+        if (puntsAposta > puntsTotal || puntsAposta < 0) {
+            return -1; /*no pot fer l'aposta*/
+        }
+        else
+        {
+            return puntsAposta;
+        }
+    }
 
     /**
      * Funció resultatJugada: gestiona una ronda de joc segons el tipus d’aposta.
@@ -85,9 +146,18 @@ public class Ruleta {
      * @return int Nou saldo després de la jugada. 
      * 
      */
-    public static int resultatJugada(int tipusAposta, int saldo, int puntsAposta, int bola) 
-    { 
-    return 0;    
+    public static int resultatJugada(int tipusAposta,int saldo,int puntsAposta, int bola){
+      if((tipusAposta == -2 && bola%2==0) || (tipusAposta == -1 && bola%2!=0)){
+          System.out.println("Has ganado el doble");
+         saldo += puntsAposta * 2;
+      } else if (tipusAposta == bola){
+          System.out.println("Has ganado 36 veces mas");
+           saldo += puntsAposta * 36;
+      } else {
+          System.out.println("Has perdido");
+         saldo -=puntsAposta;
+      }
+      return saldo;
     }
 }
 
