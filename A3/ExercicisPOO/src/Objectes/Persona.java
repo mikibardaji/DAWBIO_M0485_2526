@@ -9,7 +9,7 @@ package Objectes;
  * @author mabardaji
  */
 public class Persona {
-    private String DNI;
+    private final String DNI;
     private String nombre;
     private String apellidos;
     private int edad;
@@ -28,12 +28,13 @@ public class Persona {
         return DNI;
     }
     
+    /* setter ya no vale porque DNI es final y nunca se podra cambiar
     public void setDNI(String DNI1)
     {
         
         DNI = DNI1;
     }
-
+*/
     public String getNombre() {
         return nombre;
     }
@@ -100,4 +101,18 @@ public class Persona {
         //diferencia = this.edad - p.getEdad();
          return diferencia;       
     }
+    
+    public static boolean validarDNI(String dni)
+    {
+        if (dni.length()!=9)
+        {
+            return false;
+        }
+        else if (dni.charAt(8) == 'A'
+                || dni.charAt(8) == 'B'
+                )
+       // 
+            return Character.isLetter(dni.charAt(8)); //letra
+    }
+    
 }

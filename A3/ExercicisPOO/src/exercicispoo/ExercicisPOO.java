@@ -6,6 +6,7 @@ package exercicispoo;
 
 import Objectes.Persona;
 import Objectes.Punto;
+import Objectes.Rectangle;
 
 /**
  *
@@ -17,6 +18,24 @@ public class ExercicisPOO {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        Rectangle rect = new Rectangle(10, 10, 15, 18);
+        
+        System.out.println("-> " + rect.getx1());
+        System.out.println("base " + rect.getBase());
+        System.out.println("altura " + rect.getAltura());
+        
+        System.out.println("perimetro " + rect.getPerimetro());
+        System.out.println("area " + rect.getArea());
+        
+        
+        
+        System.out.println("El maximo de los rectangulos es " + Rectangle.MAX);
+        
+        Rectangle x1 = Rectangle.rectanguloAleatorio();
+        x1.imprimir();
+        /*
+        
         Punto p1 = new Punto(5,0);
         System.out.println("p1.x " + p1.getX());
         System.out.println("p1.y " + p1.getY());
@@ -41,7 +60,7 @@ public class ExercicisPOO {
 //        p.nombre= "Jackson";
         System.out.println("nombre -> " + p.getNombre());
         
-        p.setDNI("NUEVO DNI");
+        //p.setDNI("NUEVO DNI");
         p.imprime();
         
         System.out.println("Mayor de edad? " + p.esMayorEdad());
@@ -54,7 +73,7 @@ public class ExercicisPOO {
        
         Punto c = Punto.crearPuntoAleatorio();
         c.imprime();
-        
+        */
     }
     
 }
