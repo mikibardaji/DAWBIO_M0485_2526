@@ -18,9 +18,9 @@ public class TeoriaHerencia {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Persona people = new Persona("P1","D1","T1");
+        //Persona people = new Persona("P1","D1","T1");
         
-        
+        /*
         Alumne student = new Alumne("Pepe", "DNI3", "telefono4", "DAWBIO1");
         //student.setCiclo("DAWBIO1");
         student.setCurso("1");
@@ -71,7 +71,22 @@ public class TeoriaHerencia {
         else
         {
             System.out.println("No son iguales studnt2");
-        }
+        }*/
+        
+        /*Polimorfismo una variable de clase superior puede comportarse como cualquer clase deridava*/
+        Persona people = new Persona("P1","D1","T1");
+        
+        people.saludar();
+        //polimorfismo
+        people = new Alumne("alumno", "DNI2", "telefono", "DAWBIO");
+        people.saludar();
+        
+        Alumne aux = (Alumne) people;
+       
+        
+        
+        
+        
     }
     
 }

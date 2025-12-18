@@ -71,12 +71,26 @@ public class Alumne extends Persona {
         System.out.println("Bro");
     }
     
-
+    /* metodo definido 1:
+    Polirmofismo ()
+                 (String)
+    */
     public void cambiarTelefono()
     {
         this.telefono = "666444444";
     }
 
+    public void cambiarTelefono(String nuevo)
+    {
+        this.telefono = nuevo;
+    }
+    
+    public void cambiarTelefono(int  nuevo)
+    {
+        System.out.println("ddsdsdsds");
+        //this.telefono = nuevo;
+    }
+    
     @Override
     public String toString() {
         return super.toString() + "con expediente=" + nExp + ", ciclo=" + ciclo + ", Curso=" + Curso + '}';
