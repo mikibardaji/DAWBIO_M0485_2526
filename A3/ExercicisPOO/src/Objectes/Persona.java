@@ -72,26 +72,12 @@ public class Persona {
     
     public boolean esMayorEdad()
     {
-        if (this.edad>=18)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return this.edad>=18;
     }
     
     public boolean esJubilado()
     {
-         if (this.edad>=65)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }       
+        return this.edad>=65;       
     }
     
     public int diferenciaEdad(Persona p)
@@ -112,7 +98,8 @@ public class Persona {
                 || dni.charAt(8) == 'B'
                 )
        // 
-            return Character.isLetter(dni.charAt(8)); //letra
+            //return Character.isLetter(dni.charAt(8)); //letra
+            return false;
     }
     
 }

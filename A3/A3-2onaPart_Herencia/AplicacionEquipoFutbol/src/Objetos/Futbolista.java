@@ -10,15 +10,18 @@ package Objetos;
  */
 public class Futbolista extends Entrenamiento{
     private int goles;
+    private PosicionesCampo posicion;
 
     public Futbolista(String nombre, int edad) {
         super(nombre, edad);
         this.goles = 10;
+        posicion = PosicionesCampo.DELANTERO;
     }
 
-    public Futbolista(String nombre, int edad, int goles) {
+    public Futbolista(String nombre, int edad, int goles, PosicionesCampo x) {
         super(nombre, edad);
         this.goles = goles;
+        this.posicion = x;
     }    
 
     
@@ -26,6 +29,7 @@ public class Futbolista extends Entrenamiento{
     public void jugarPartido()
     {
         System.out.println("Estoy jugando un partido");
+        this.salario += 1000;
     }
 
     @Override

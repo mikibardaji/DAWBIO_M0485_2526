@@ -6,12 +6,14 @@ package Objetos;
 
 /**
  *
- * @author mabardaji
+ * @author mabardaji derivan futbolista y entrenador
  */
 public abstract class Entrenamiento extends EquipoFutbol{
 
     public Entrenamiento(String nombre, int edad) {
         super(nombre, edad);
+        this.salario = 1500;
+        
     }
     
     public abstract void entrenar();

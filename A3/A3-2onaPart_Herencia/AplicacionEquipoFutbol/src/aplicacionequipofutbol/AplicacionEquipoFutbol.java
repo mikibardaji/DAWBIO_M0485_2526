@@ -33,6 +33,24 @@ public class AplicacionEquipoFutbol {
         soccer.viajar();
         Presidente presi = new Presidente(10,"floren", 10);
         presi.viajar();
+        
+        
+        System.out.println("Sueldo antes del partido " + soccer.getSalario());
+        soccer.jugarPartido();
+        System.out.println("Sueldo despues del partido " + soccer.getSalario());
+        
+        
+        soccer.setEdad(20);
+        soccer2.setEdad(20);
+        System.out.println("iguales? " + soccer.equals(soccer2));
+        
+        presi.tratarContrato(soccer);
+        presi.tratarContrato(trainer);
+        presi.tratarContrato(presi);
+        
+        Futbolista soccer3 = new Futbolista("Pepe", 50, 2, PosicionesCampo.MEDIO);
+        Futbolista soccer4 = new Futbolista("Pepe2", 150, 12, PosicionesCampo.valueOf("MEDIO"));
+        Futbolista soccer5 = new Futbolista("Pepe2", 150, 12, PosicionesCampo.valueOf("MEDI"));
          
     }
     

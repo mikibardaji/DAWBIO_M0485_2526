@@ -13,6 +13,7 @@ public class Masajista extends EquipoFutbol {
 
     public Masajista(String titulacion, String nombre, int edad) {
         super(nombre, edad);
+        this.salario = 500;
         this.titulacion = titulacion;
     }
     
