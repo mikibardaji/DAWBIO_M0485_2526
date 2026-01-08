@@ -50,7 +50,7 @@ public class AplicacionEquipoFutbol {
         
         Futbolista soccer3 = new Futbolista("Pepe", 50, 2, PosicionesCampo.MEDIO);
         Futbolista soccer4 = new Futbolista("Pepe2", 150, 12, PosicionesCampo.valueOf("MEDIO"));
-        Futbolista soccer5 = new Futbolista("Pepe2", 150, 12, PosicionesCampo.valueOf("MEDI"));
+       // Futbolista soccer5 = new Futbolista("Pepe2", 150, 12, PosicionesCampo.valueOf("MEDI"));
          
     }
     
