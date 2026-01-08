@@ -13,7 +13,7 @@ public class Futbolista extends Entrenamiento{
 
     public Futbolista(String nombre, int edad) {
         super(nombre, edad);
-        this.goles = 0;
+        this.goles = 10;
     }
 
     public Futbolista(String nombre, int edad, int goles) {
