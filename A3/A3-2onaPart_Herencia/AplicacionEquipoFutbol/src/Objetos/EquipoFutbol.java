@@ -10,7 +10,7 @@ package Objetos;
  */
 public abstract class EquipoFutbol implements Persona{
     protected static int id=0; //no haria falta la inicializacio porque pasa a 0
-    private int idEquipoFutbol;
+    private final int idEquipoFutbol;
     protected String nombre;
     protected int edad;
     protected int salario;
