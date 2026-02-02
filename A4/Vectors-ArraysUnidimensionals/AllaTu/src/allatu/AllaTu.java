@@ -19,6 +19,14 @@ public class AllaTu {
     public static void main(String[] args) {
         int[] todosPremiosPrograma = ponerListaPremios();
         mostrarTodosLosPremios(todosPremiosPrograma);
+        /* 
+        Completar la clase Caja
+        ponerle getters, setters si hace falta.
+        Y luego cambiar el codigo a partir de aqui
+        para adaptarll al objeto java.
+        Acordarse que todas las pasiciones del array
+        se deben inicializar con un constructor!
+        */
         Caja[] cajas1 = new Caja[todosPremiosPrograma.length];
         //totes les posiciones de cajas estan a null!!
         //per inicialitzarles haig de fer un new Caja(valorPremio);
