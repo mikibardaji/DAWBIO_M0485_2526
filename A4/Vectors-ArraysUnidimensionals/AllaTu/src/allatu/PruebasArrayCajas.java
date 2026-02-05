@@ -18,6 +18,10 @@ public class PruebasArrayCajas {
         baul[0]  = new Caja(10);
         baul[1]  = new Caja(20);
         baul[2]  = new Caja(30);
+        
+        for (int i = 0; i < baul.length; i++) {
+            baul[i] = new Caja(100*i);
+        }
         for (int i = 0; i < baul.length; i++) {
             System.out.println(baul[i].getPremio());
         }

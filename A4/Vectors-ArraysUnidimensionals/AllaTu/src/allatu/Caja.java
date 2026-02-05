@@ -9,17 +9,41 @@ package allatu;
  * @author mabardaji
  */
 public class Caja {
-    private int premio;
+    private double premio;
     private boolean abierta;
+    private boolean elegida;
 
-    public Caja(int premio) {
+    public Caja(double premio) {
         this.premio = premio;
         abierta = false;
+        elegida = false;
     }
 
-    public int getPremio() {
+
+    public double getPremio() {
         return premio;
     }
     
+    public void setPremio(int premio) {
+        this.premio = premio;
+    }
     
+    public boolean isAbierta() {
+        return abierta;
+    }
+    
+    public boolean isCerrada(){
+        return abierta==false;
+    }
+    public void setAbierta(boolean abierta) {
+        this.abierta = abierta;
+    }
+
+    public boolean isElegida() {
+        return elegida;
+    }
+    
+    public void setElegida(boolean elegida) {
+        this.elegida = elegida;
+    }
 }

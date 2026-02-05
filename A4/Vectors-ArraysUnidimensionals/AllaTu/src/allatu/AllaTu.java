@@ -17,7 +17,7 @@ public class AllaTu {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int[] todosPremiosPrograma = ponerListaPremios();
+        double[] todosPremiosPrograma = ponerListaPremios();
         mostrarTodosLosPremios(todosPremiosPrograma);
         /* 
         Completar la clase Caja
@@ -27,23 +27,25 @@ public class AllaTu {
         Acordarse que todas las pasiciones del array
         se deben inicializar con un constructor!
         */
-        Caja[] cajas1 = new Caja[todosPremiosPrograma.length];
+       
         //totes les posiciones de cajas estan a null!!
         //per inicialitzarles haig de fer un new Caja(valorPremio);
-        int[] cajas = sortearCajas(todosPremiosPrograma);
+        Caja[] cajas = sortearCajas(todosPremiosPrograma);
         mostrarEstadoCaja(cajas);
         Scanner sc = new Scanner(System.in);
-        System.out.println("Que caja quieres maximo - " + cajas.length);
-        final int caja_elegida = sc.nextInt();
+        System.out.println("Que caja quieres maximo 1 - " + cajas.length);
+        final int caja_elegida = sc.nextInt()-1;
+        cajas[caja_elegida].setElegida(true); //
         int cajasAbiertas =0;
-        int descarte=0, oferta=0;
+        int descarte=0;
+        double oferta=0;
         boolean plantarte = false;
         do
         {
             mostrarTodosLosPremios(todosPremiosPrograma);
             mostrarEstadoCaja(cajas);
             descarte=elegirCaja(cajas.length);
-            mostrarPremioCaja(cajas, descarte);
+            mostrarPremioCaja(cajas, descarte,todosPremiosPrograma);
             cajasAbiertas++;
             if (cajasAbiertas%3==0) //llamada banquero
             {
@@ -56,7 +58,7 @@ public class AllaTu {
         {
             System.out.println("Has ganado " + oferta);
         }
-        System.out.println("Tu caja tenia" + mostrarPremioCaja(cajas, caja_elegida-1));
+        System.out.println("Tu caja tenia" + mostrarPremioCaja(cajas, caja_elegida, todosPremiosPrograma));
     }
     
     /*
@@ -67,9 +69,9 @@ Retornas el array con todos los premios
 	Salada retornar int[] premiosConcurso
 
     */
-    public static int[] ponerListaPremios()
+    public static double[] ponerListaPremios()
     {
-        int[] todosPremiosPrograma = {10,20,30,50,100,500,1000,2000};
+        double[] todosPremiosPrograma = {0.05,0.1,0.15,0.20,0.25,0.4,0.5,0.6,1};
         return todosPremiosPrograma;
     }
     
@@ -81,17 +83,18 @@ El array de caja, validando que la posicion no tenga ya premio (sino otro random
 Variables salida     
     
     */
-    public static int[] sortearCajas(int[] premiosOrdenados)
+    public static Caja[] sortearCajas(double[] premiosOrdenados)
     { //{10,100,500,1000,5000,10000}
-        int[] cajas = new int[premiosOrdenados.length];
+        Caja[] cajas = new Caja[premiosOrdenados.length];
+        //totes posicions null
         Random rd = new Random();
         for (int i = 0; i < premiosOrdenados.length; i++) {
             int posicion;
             do
             {
                 posicion = rd.nextInt(premiosOrdenados.length);
-            }while(cajas[posicion]!=0); 
-            cajas[posicion] = premiosOrdenados[i];
+            }while(cajas[posicion]!=null); 
+            cajas[posicion] = new Caja(premiosOrdenados[i]);
         }
         System.out.println("Cajas ya sorteadas");
         return cajas;
@@ -102,7 +105,7 @@ Variables salida
 o	ArrayPremiosConcurso
 ?	Muestra todos los valores de premios
 */
-    public static void mostrarTodosLosPremios(int[] premiosOrdenados)
+    public static void mostrarTodosLosPremios(double[] premiosOrdenados)
     {
         System.out.println("Premios aun por abrir");
         for (int i = 0; i < premiosOrdenados.length; i++) {
@@ -121,12 +124,17 @@ o	Entrada Valor entero posición
 o	Salida valorPremioCaja (mostrar print , o devolver)
 *       poner esa posición a 0 marcada abierta
      */
-    public static int mostrarPremioCaja(int[] cajas, int cajaDescartada)
+    public static double mostrarPremioCaja(Caja[] cajas, int cajaDescartada, double[] todosPremiosPrograma)
     {
-        System.out.println("Has descartado " + cajas[cajaDescartada] + "€");
-        int premio = cajas[cajaDescartada];
-        cajas[cajaDescartada] = 0;
-        return premio; //return cajas[cajaDescartada]
+        System.out.println("Has descartado " + cajas[cajaDescartada].getPremio() + "€");
+        cajas[cajaDescartada].setAbierta(true);
+        for (int i = 0; i < todosPremiosPrograma.length; i++) {
+            if (todosPremiosPrograma[i] == cajas[cajaDescartada].getPremio())
+            {
+                todosPremiosPrograma[i] = 0; //para no mostrarlo
+            }
+        }
+        return cajas[cajaDescartada].getPremio(); //return cajas[cajaDescartada]
     }
     
     /**
@@ -146,7 +154,7 @@ o	Salida valorPremioCaja (mostrar print , o devolver)
             System.out.println("Caja a descartar 1-" + lenght);
             posicion = sc.nextInt();
         }while(posicion<1 || posicion>lenght);
-        return posicion;
+        return (posicion-1); //el jugador ha elegido 1, y en el array es la 0
     }
     
     /* 
@@ -156,18 +164,18 @@ o	Salida valorPremioCaja (mostrar print , o devolver)
         ?	Divide por cajas por abrir (variable contador)
         ?	Retorna el valor
     */
-    public static int ofertaBanca(int[] cajas)
+    public static double ofertaBanca(Caja[] cajas)
     {
         int acumPremiosDescubrir = 0;
         int cajasAbrir=0;
         for (int i = 0; i < cajas.length; i++) {
-            if (cajas[i]!=0) // no abierta
+            if (cajas[i].isCerrada() && !cajas[i].isElegida()) // no abierta
             {
-                acumPremiosDescubrir += cajas[i];
+                acumPremiosDescubrir += cajas[i].getPremio();
                 cajasAbrir++;
             }
         }
-        return acumPremiosDescubrir/cajasAbrir;
+        return (double)acumPremiosDescubrir/cajasAbrir;
     }
     
     /*
@@ -175,11 +183,12 @@ o	Salida valorPremioCaja (mostrar print , o devolver)
     o	arrayCajas (tendrá premios y posiciones a0)
     o	Mostrar la posición  (índice) de solo las que no están a 0
     */
-    public static void mostrarEstadoCaja(int[] cajas)
+    public static void mostrarEstadoCaja(Caja[] cajas)
     {
         System.out.println("Cajas por abrir");
         for (int i = 0; i < cajas.length; i++) {
-            if (cajas[i]>0)
+            //if (!cajas[i].isAbierta())
+            if (cajas[i].isCerrada() && !cajas[i].isElegida())
             {
                 System.out.print((i+1) + "-");
             }
@@ -209,10 +218,10 @@ o	Salida valorPremioCaja (mostrar print , o devolver)
      * @param cajas
      * @return 
      */
-    private static boolean cajasAbrir(int[] cajas) {
+    private static boolean cajasAbrir(Caja[] cajas) {
         int abrir=0;
         for (int i = 0; i < cajas.length; i++) {
-            if (cajas[i]!=0)
+            if (cajas[i].isCerrada())
             {
                 abrir++;
             }
