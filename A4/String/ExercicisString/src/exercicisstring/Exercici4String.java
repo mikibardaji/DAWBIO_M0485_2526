@@ -30,7 +30,9 @@ public class Exercici4String {
             char lletra = frase.charAt(pos);
 
             switch (lletra) {
-                case 'a': n_a++; break;
+                case 'a': 
+                case 'A': //si no hagues fet el toLowerCase();    
+                    n_a++; break;
                 case 'e': n_e++; break;
                 case 'i': n_i++; break;
                 case 'o': n_o++; break;

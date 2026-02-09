@@ -31,7 +31,9 @@ public class Exercici3String {
 
         // Concatenacio
         String codi = nom.substring(0, 3).concat(cognom1.substring(0, 3).concat(cognom2.substring(0, 3)));
-
+        String codi2 =        nom.substring(0, 3)
+                            + cognom1.substring(0, 3)
+                            + cognom2.substring(0, 3); 
         // Passem a majúscules
         codi = codi.toUpperCase();
 
