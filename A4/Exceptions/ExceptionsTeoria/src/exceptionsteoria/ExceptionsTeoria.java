@@ -5,6 +5,8 @@
 package exceptionsteoria;
 
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -17,10 +19,32 @@ public class ExceptionsTeoria {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-       // divisionZero();
+        int num;
+        try
+        {
+        Scanner sc = new Scanner(System.in);
+        Random rd = new Random();
+        System.out.println("Pon un numero maximo y te dare un aleatorio");
+        num = sc.nextInt();
+        System.out.println("El aleatorio es " + rd.nextInt(num));
+        }
+        catch(InputMismatchException e)
+            {
+                System.out.println("He dit que fiquis la teva edad no una lletra!!!");
+            }
+        catch(NoSuchElementException e)
+            {
+                System.out.println(e.getMessage());
+            }
+        catch(IllegalArgumentException e)
+        {
+            System.out.println("El limite del random no puede ser negativo");
+            System.out.println(e.getMessage());
+        }
+                
+       //divisionZero();
         //fueraLimites();
-        entradaDadesIncorrectes();
+        //entradaDadesIncorrectes();
     }
 
     private static void divisionZero() {
@@ -76,6 +100,10 @@ public class ExceptionsTeoria {
             }catch(InputMismatchException e)
             {
                 System.out.println("He dit que fiquis la teva edad no una lletra!!!");
+            }
+            catch(NoSuchElementException e)
+            {
+                System.out.println(e.getMessage());
             }
     }
     
