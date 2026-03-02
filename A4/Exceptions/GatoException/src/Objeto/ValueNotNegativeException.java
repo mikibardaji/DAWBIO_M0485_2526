@@ -1,0 +1,17 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Objeto;
+
+/**
+ *
+ * @author mabardaji
+ */
+public class ValueNotNegativeException extends Exception {
+
+    public ValueNotNegativeException(String message) {
+        super(message + " no puede ser negativo");
+    }
+    
+}
