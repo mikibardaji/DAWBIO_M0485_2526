@@ -88,6 +88,7 @@ public class TeoriaArrayList {
         }
         
         Animal dog = new Animal(3,"Inventado","Tiranousurs");
+        //if (hotel.remove(new Animal(3,null,null)))
         if (hotel.remove(dog))
             System.out.println("Borrant sonia");
         else
@@ -100,33 +101,33 @@ public class TeoriaArrayList {
             System.out.println(hotel.get(i));
         }
         System.out.println("Noms agenda" + hotel.size());
-        /*
+       
         System.out.println("IndexOf em retorna la posició");
-        System.out.println("Jackson posició esta " 
-                + hotel.indexOf("Jackson"));
-        System.out.println("Jordi posició esta " 
-                + hotel.indexOf("Jordi"));
+        System.out.println("Animal habitacio 4 posició esta " 
+                + hotel.indexOf(new Animal(4,"Inventat","Inventat")));
+        System.out.println("animal habitació 6 posició esta " 
+                + hotel.indexOf(new Animal(6,"Inventat","Inventat")));
         
-        String delete = hotel.remove(0);
+        Animal delete = hotel.remove(0);
         System.out.println("He borrat " + delete);
-        for (String nom : hotel) { //for each (Iterable)
+        for (Animal nom : hotel) { //for each (Iterable)
             System.out.println(nom);
         }
-        System.out.println("Noms agenda" + hotel.size());
+        System.out.println("Animals hotel" + hotel.size());
         
-        hotel.add(0, delete);
+        hotel.add(1, delete);
         System.out.println("he tornar a afegir " + delete );
-        for (String nom : hotel) { //for each (Iterable)
+        for (Animal nom : hotel) { //for each (Iterable)
             System.out.println(nom);
         }
         System.out.println("Noms agenda" + hotel.size());
-        System.out.println("Actualizo posició 2 amb Baltasar");
-        hotel.set(2, "Baltasar"); //UPDATE
-        for (String nom : hotel) { //for each (Iterable)
+        System.out.println("Actualizo posició 2 a");
+        hotel.set(2, new Animal(14,"Olatz","Sense raça")); //UPDATE
+        for (Animal nom : hotel) { //for each (Iterable)
             System.out.println(nom);
         }
         System.out.println("Noms agenda" + hotel.size());
-        */
+
     }
 
 //    private static void metode1(List<String> agenda) { //aprofito polimorfisme
