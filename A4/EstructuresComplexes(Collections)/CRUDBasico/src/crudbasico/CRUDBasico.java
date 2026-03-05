@@ -65,6 +65,10 @@ public class CRUDBasico {
                             System.out.println("? Aquí irá el código de la opción 4.");
                             listarLuchadoresPeso(mundial);
                             break;
+                            
+                        case 6:
+                            cambiarNombre(mundial);
+                            break;
                         case 7:
                             System.out.println("? Saliendo del programa...");
                             break;
@@ -232,6 +236,44 @@ public class CRUDBasico {
             num++;
         }
         System.out.println("Luchadores peso " + categoria + " : "  + luchadorSeleccioPeso.size());
+    }
+
+    private static void cambiarNombre(List<Luchador> mundial) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Pon la licencia que quieres dar de baja");
+        int idLicencia = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Pon nuevo nombre");
+        String  nombre = sc.nextLine();
+        //podria fer un bucle per tots els lluitadors
+        //i preguntar per id
+        int i, pos_encontrada=-1;
+        for (i = 0; i < mundial.size(); i++) {
+            if (mundial.get(i).getIdLicencia()==idLicencia)
+            {
+                pos_encontrada=i;
+                //break;
+            }
+        }
+        if (pos_encontrada!=-1)
+        {//encontre
+            mundial.get(pos_encontrada).setNombre(nombre);
+        }
+        
+        Luchador fakeBuscar = new  Luchador(idLicencia, "fakeNombre");
+        int posicio = mundial.indexOf(fakeBuscar); //equals
+        if (posicio == -1)
+        {
+            System.out.println("Luchador no existe con licencia " + idLicencia);
+        }
+        else
+        {
+          //  Luchador cambiar = mundial.get(posicio);
+          //  cambiar.setNombre(nombre);
+          mundial.get(posicio).setNombre(nombre);
+            System.out.println("Nombre cambiado" + mundial.get(posicio));
+        }
+        
     }
     
 }
