@@ -44,10 +44,8 @@ public class CRUDBasico {
                           sc.nextLine();
                     }
                 }while(!valorEntero);
-                
-                
 
-                if (opcion < 1 || opcion > 5) {
+                if (opcion < 1 || opcion > 7) {
                     System.out.println("? Opción no válida. Debe ser entre 1 y 5.");
                 } else {
                     switch (opcion) {
@@ -67,12 +65,12 @@ public class CRUDBasico {
                             System.out.println("? Aquí irá el código de la opción 4.");
                             listarLuchadoresPeso(mundial);
                             break;
-                        case 5:
+                        case 7:
                             System.out.println("? Saliendo del programa...");
                             break;
                     }
                 }
-        } while (opcion != 5);
+        } while (opcion != 7);
 
         sc.close();
     }
@@ -83,7 +81,9 @@ public class CRUDBasico {
             System.out.println("2. Listar todos Luchadores");
             System.out.println("3. Borrar Luchador");
             System.out.println("4. Listar Luchadores por categoria peso");
-            System.out.println("5. Salir");
+            System.out.println("5. Añadir Luchador en posicion elegida");
+            System.out.println("6. Canviar nombre luchador (pedir idLicencia)");
+            System.out.println("7. Salir");
             System.out.print("Elige una opción: ");
     }
 
