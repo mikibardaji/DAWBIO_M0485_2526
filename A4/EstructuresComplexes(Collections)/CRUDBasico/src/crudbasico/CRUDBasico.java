@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -67,6 +65,7 @@ public class CRUDBasico {
                             break;
                         case 4:
                             System.out.println("? Aquí irá el código de la opción 4.");
+                            listarLuchadoresPeso(mundial);
                             break;
                         case 5:
                             System.out.println("? Saliendo del programa...");
@@ -83,7 +82,7 @@ public class CRUDBasico {
             System.out.println("1. Alta Luchador");
             System.out.println("2. Listar todos Luchadores");
             System.out.println("3. Borrar Luchador");
-            System.out.println("4. Listar Luchadores por criterio.");
+            System.out.println("4. Listar Luchadores por categoria peso");
             System.out.println("5. Salir");
             System.out.print("Elige una opción: ");
     }
@@ -136,11 +135,14 @@ public class CRUDBasico {
         ejemplo.setPeso(88);
         mundial.add(ejemplo);
         ejemplo = new Luchador(10, "Goku");
-        ejemplo.setPeso(154);
+        ejemplo.setPeso(74);
         mundial.add(ejemplo);
         ejemplo = new Luchador(99, "Vegeta");
-        ejemplo.setPeso(124);
+        ejemplo.setPeso(64);
         mundial.add(ejemplo);
+        ejemplo = new Luchador(50, "Musculator");
+        ejemplo.setPeso(63);
+        mundial.add(ejemplo);        
         } catch (NotValidWeightException ex) {
             System.out.println("Peso no valido");
         }
@@ -173,7 +175,7 @@ public class CRUDBasico {
         /*2 segudna parteinteraccion con la estructura dados compleja (add/read/delete/updte, rpalce
         obligatoria*/
         if (mundial.remove(fakeDelete))
-        {
+        {//3 parte salida datos
             System.out.println("Luchador eliminado mundial");
         }
         else
@@ -181,7 +183,55 @@ public class CRUDBasico {
             System.out.println("No he podido borrar luchador con licencia " 
                     + fakeDelete.getIdLicencia());
         }
-        //3 parte salida datos
+        
+    }
+
+    private static void listarLuchadoresPeso(List<Luchador> mundial) {
+          /*1era parte recogida datos (teclado, fichero, bd)
+             casi siempre esta pero no en todos */
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Pon la categoria y te dire que luchadores pueden luchar");
+        String categoria = sc.nextLine().toUpperCase();
+        int pesoLimite=0;
+        switch(categoria)
+        {
+            case "MOSCA":
+                pesoLimite = 57;
+                break;
+            case "GALLO":
+                pesoLimite = 62;
+                break;                
+            case "PLUMA":
+                pesoLimite = 65;
+                break;         
+            case "SEMIPESADO":
+                pesoLimite = 100;
+                break;      
+            case "PESADO":
+                pesoLimite = 200;
+                break;                      
+        }
+        
+           /*2 segudna parteinteraccion con la estructura dados compleja (add/read/delete/updte, rpalce
+        obligatoria*/
+        List<Luchador> luchadorSeleccioPeso = new ArrayList<>();
+        for (int i = 0; i < mundial.size(); i++) {
+            //System.out.println(i + "-" + mundial.get(i));
+            if (mundial.get(i).getPeso()<= pesoLimite)
+            {//cumples criterio
+                //System.out.println("seleccionado");
+                luchadorSeleccioPeso.add(mundial.get(i)); //voy poniendo los validos
+            }
+        }
+        //luchadorSeleccioPeso sera un array con luchadores validos
+           
+           //3 parte salida datos
+        int num=1;
+        for (Luchador fighter : luchadorSeleccioPeso) {
+            System.out.println(num + "- " + fighter);
+            num++;
+        }
+        System.out.println("Luchadores peso " + categoria + " : "  + luchadorSeleccioPeso.size());
     }
     
 }
