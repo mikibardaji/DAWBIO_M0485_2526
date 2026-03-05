@@ -49,6 +49,26 @@ public class Luchador {
         else
             throw new NotValidWeightException();
     }
+
+    @Override
+    public String toString() {
+        return  nombre +  " licencia " + idLicencia+  " con un peso de " + peso +  " kg.";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Luchador)) {
+            return false;
+        }
+        final Luchador other = (Luchador) obj;
+        return this.idLicencia == other.idLicencia;
+    }
     
     
     
