@@ -22,8 +22,7 @@ public class TeoriaArrayList {
     public static void main(String[] args) {
         
         //arrayListString();
-        
-        
+
         List<Animal> hotel; //per aprofitar polimorfisme
         hotel = new ArrayList<>(); //implementació especifica
         //afegir
@@ -75,11 +74,7 @@ public class TeoriaArrayList {
             System.out.println("No hay nadie  en la habitacion" + 
                     buscado3.getnCelda());        
         
-        
-        
-    
-        
-        
+
         Iterator<Animal> iterador = hotel.iterator();
         while(iterador.hasNext())
         {
