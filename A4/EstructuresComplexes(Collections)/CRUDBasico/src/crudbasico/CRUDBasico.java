@@ -45,8 +45,8 @@ public class CRUDBasico {
                     }
                 }while(!valorEntero);
 
-                if (opcion < 1 || opcion > 7) {
-                    System.out.println("? Opción no válida. Debe ser entre 1 y 5.");
+                if (opcion < 1 || opcion > 8) {
+                    System.out.println("? Opción no válida. Debe ser entre 1 y 8.");
                 } else {
                     switch (opcion) {
                         case 1:
@@ -62,33 +62,40 @@ public class CRUDBasico {
                             borrarLuchador(mundial);
                             break;
                         case 4:
-                            System.out.println("? Aquí irá el código de la opción 4.");
+                            System.out.println("? Listar Luchadores.");
                             listarLuchadoresPeso(mundial);
                             break;
-                            
+                        case 5:
+                            System.out.println("? Alta en posicion elegida");
+                            anyadirLuchadorPosicion(mundial);
+                            break;                            
                         case 6:
                             cambiarNombre(mundial);
                             break;
                         case 7:
+                            System.out.println("nueva opcion");
+                            break;
+                        case 8:
                             System.out.println("? Saliendo del programa...");
                             break;
                     }
                 }
-        } while (opcion != 7);
+        } while (opcion != 8);
 
         sc.close();
     }
 
     private static void mostrarMenu() {
-            System.out.println("\n===== MENÚ =====");
-            System.out.println("1. Alta Luchador");
-            System.out.println("2. Listar todos Luchadores");
-            System.out.println("3. Borrar Luchador");
-            System.out.println("4. Listar Luchadores por categoria peso");
-            System.out.println("5. Añadir Luchador en posicion elegida");
-            System.out.println("6. Canviar nombre luchador (pedir idLicencia)");
-            System.out.println("7. Salir");
-            System.out.print("Elige una opción: ");
+        System.out.println("\n===== MENÚ =====");
+        System.out.println("1. Alta Luchador");
+        System.out.println("2. Listar todos Luchadores");
+        System.out.println("3. Borrar Luchador");
+        System.out.println("4. Listar Luchadores por categoria peso");
+        System.out.println("5. Añadir Luchador en posicion elegida");
+        System.out.println("6. Canviar nombre luchador (pedir idLicencia)");
+        System.out.println("7. nueva opcion");
+        System.out.println("8. Salir");
+        System.out.print("Elige una opción: ");
     }
 
     private static void altaUsuario(List<Luchador> mundial) {
@@ -268,12 +275,52 @@ public class CRUDBasico {
         }
         else
         {
-          //  Luchador cambiar = mundial.get(posicio);
-          //  cambiar.setNombre(nombre);
-          mundial.get(posicio).setNombre(nombre);
-            System.out.println("Nombre cambiado" + mundial.get(posicio));
+         //  Luchador cambiar = mundial.get(posicio);
+         //  cambiar.setNombre(nombre);
+         mundial.get(posicio).setNombre(nombre);
+         System.out.println("Nombre cambiado" + mundial.get(posicio));
         }
         
+    }
+
+    private static void anyadirLuchadorPosicion(List<Luchador> mundial) {
+            int posicion=0;
+        try
+        {
+        Scanner sc = new Scanner(System.in);
+             /*1era parte recogida datos (teclado, fichero, bd)
+             casi siempre esta pero no en todos */
+        System.out.println("Pon el numero de licencia");
+        int id = sc.nextInt();
+        sc.nextLine(); //limpio el buffer o el que es lo mismo el return
+        System.out.println("Pon el nombre del luchador");
+        String nombre = sc.nextLine();
+        System.out.println("Pon el peso del luchador");
+        int peso = sc.nextInt();
+        sc.nextLine(); //limpio el buffer o el que es lo mismo el return
+        
+        Luchador wrestler = new Luchador(id, nombre);
+        wrestler.setPeso(peso);
+    
+        do
+        {
+            System.out.println("Pon posicion a añadir en el listado 1-" + mundial.size() + ")");
+            posicion = sc.nextInt()-1; //para que 1 sea 0 y así succesivament
+        }while(posicion<1 || posicion>mundial.size());
+        
+         /*2 segudna parteinteraccion con la estructura dados compleja (add/read/delete/updte, rpalce
+        obligatoria*/
+            mundial.add(posicion, wrestler);
+        /* Salida datos a usurio o fichero*/
+        
+            System.out.println("Añadido luchador en posicion " + (posicion+1));
+        }catch(IndexOutOfBoundsException ex)
+        {//amb el do while no es posible que passi
+            System.out.println("Posicion indicada no valida " + posicion);
+        }catch(NotValidWeightException ex)
+        {
+            System.out.println("Pesi no valido " + ex.getMessage());
+        }  
     }
     
 }
