@@ -48,9 +48,9 @@ public class Producte {
 
     @Override
     public String toString() {
-        return "ID: " + id + " | Nom: " + nom + " | Preu: " + preu + "‚Ç¨";
+        return "ID: " + id + " | Nom: " + nom + " | Preu: " + preu + " Ä.";
     }
-    // Equals nom√©s per ID
+    // Equals nom?©s per ID
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -40,13 +40,18 @@ public class RepositoriProductesDAO {
             throw new IdNegativaException("La ID no pot ser negativa.");
         }
         Producte auxiliar = new Producte(0,"");
+        auxiliar.setId(id);
         int index = productes.indexOf(auxiliar);
         if (index != -1) 
             return productes.get(index);
         return null;
     }
-    public boolean eliminarProducte(int id) {
-        return true;
+    public boolean eliminarProducte(int id) throws IdNegativaException {
+        
+        Producte deleteFake = new Producte(1, "delete");
+        deleteFake.setId(id);
+
+        return productes.remove(deleteFake);
     }
     
     public List<Producte> obtenirTots()
@@ -67,7 +72,7 @@ public class RepositoriProductesDAO {
         }
         return productosSeleccionados;
     }
-    // TO DO: altres m√®todes com cercarPerNom, cercarPerPreu, etc.
+    // TO DO: altres m?®todes com cercarPerNom, cercarPerPreu, etc.
 
     private void anyadirProductosPrueba() {
         Producte add = new Producte(1, "Product1");
@@ -83,10 +88,45 @@ public class RepositoriProductesDAO {
             add = new Producte(40, "Product1");
             add.setId(40);
             productes.add(add);
-            
+            add = new Producte(50, "Product5");
+            add.setId(50);
+            productes.add(add);            
             
         } catch (IdNegativaException ex) {
             Logger.getLogger(RepositoriProductesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public List<Producte> getProductsByName(String nombre) {
+        List<Producte> selec = new ArrayList<>();
+        for (int i = 0; i < productes.size(); i++) {
+            if (productes.get(i).getNom().equalsIgnoreCase(nombre))
+            {
+                selec.add(productes.get(i));
+            }
+        }
+        
+//        for (Producte produc : productes) {
+//            if (produc.getNom().equalsIgnoreCase(nombre))
+//            {
+//                selec.add(produc);
+//            }
+//        }
+        
+        
+        return selec;
+    }
+
+    public int deleteByPrecioLimite(int precioLimite) {
+        //podria validar precio negativo y delvover exception
+        int delete=0;
+        for (int i = 0; i < productes.size(); i++) {
+            if(productes.get(i).getPreu()<=precioLimite)
+            {
+              productes.remove(i);
+              delete++;
+            }
+        }
+        return delete;
     }
 }

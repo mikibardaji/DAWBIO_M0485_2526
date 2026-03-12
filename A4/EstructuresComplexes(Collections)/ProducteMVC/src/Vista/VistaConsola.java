@@ -34,7 +34,7 @@ public class VistaConsola {
         do {
             mostrarMenu();
             opcio = scanner.nextInt();
-
+            scanner.nextLine();//limpio el enter despues del int
             switch (opcio) {
                 case 1:
                     afegirProducte(repositori);
@@ -48,11 +48,18 @@ public class VistaConsola {
                 case 4:
                     eliminarProducte(repositori);
                     break;
+                case 5:
+                    listarProductosNombre(repositori);
+                    break;
+                case 6:
+                    BorrarProductosByPrecio(repositori);
+                    break;
+
                 case 0:
                     System.out.println("Sortint del programa...");
                     break;
                 default:
-                    System.out.println("OpciÃ³ no vÃ lida.");
+                    System.out.println("Opci?³ no v? lida.");
             }
 
         } while (opcio != 0);
@@ -65,8 +72,9 @@ public class VistaConsola {
         System.out.println("1. Afegir producte");
         System.out.println("2. Llistar productes");
         System.out.println("3. Cercar producte per ID");
-        System.out.println("4. Eliminar producte (Casa)");
+        System.out.println("4. Eliminar producte (Casa)");        
         System.out.println("5. Buscar productos con mismo nombre (Casa)");        
+        System.out.println("6. Eliminar producte mas bajos de un precio");
         System.out.println("0. Sortir");
         System.out.print("Escull una opció: ");
     }
@@ -80,8 +88,13 @@ public class VistaConsola {
             id = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.print("Nom: ");
-            String nom = scanner.nextLine();
+            String nom;
+            do
+            {
+                System.out.print("Nom no pot ser buit: ");
+                nom = scanner.nextLine();
+            }while(nom.isBlank()); //validació entrada
+            
 
             System.out.print("Preu: ");
             double preu = scanner.nextDouble();
@@ -89,7 +102,7 @@ public class VistaConsola {
             Producte p = new Producte(preu, nom);
             p.setId(id);
             
-            if (repositori.afegirProducte(p))//modelo CRUD
+            if (repositori.afegirProducte(p))//modelo CRUD (Create)
             { //salida datos
                 System.out.println("Producte afegit correctament.");
             }
@@ -117,6 +130,7 @@ public class VistaConsola {
         for (Producte p : todos) {
             System.out.println(p);
         }
+        System.out.println("Productos mostrados "+ todos.size());
     }
 
     private void llistarProductesPreus(RepositoriProductesDAO repositori) {
@@ -131,6 +145,7 @@ public class VistaConsola {
         for (Producte p : todos) {
             System.out.println(p);
         }
+        System.out.println("Productos mostrados "+ todos.size());
     }    
     
     
@@ -139,15 +154,14 @@ public class VistaConsola {
             System.out.print("Introdueix ID a cercar: ");
             int id = scanner.nextInt();
 
-            Producte trobat = repositori.cercarPerId(id);
-
+            Producte trobat = repositori.cercarPerId(id); //CRUD Read
+            //sortida dades
             if (trobat != null) {
                 System.out.println("Producte trobat:");
                 System.out.println(trobat);
             } else {
                 System.out.println("No existeix cap producte amb aquest ID.");
             }
-
         } catch (IdNegativaException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
@@ -157,10 +171,42 @@ public class VistaConsola {
         System.out.print("Introdueix ID a eliminar: ");
         int id = scanner.nextInt();
 
-        if (repositori.eliminarProducte(id)) {
-            System.out.println("Producte eliminat.");
-        } else {
-            System.out.println("No s'ha trobat el producte.");
+        try {
+            if (repositori.eliminarProducte(id)) {
+                System.out.println("Producte eliminat.");
+            } else {
+                System.out.println("No s'ha trobat el producte.");
+            }
+        } catch (IdNegativaException ex) {
+            System.err.println("Error borrando producto " + ex.getMessage());
+        } //err per pintar amb vermell
+    }
+
+    private void listarProductosNombre(RepositoriProductesDAO repositori) {
+        //pedir un nombre
+        System.out.print("Introduce el nombre del producto ");
+        String nombre = scanner.nextLine();
+        //consultar al modelo que me de todos los que tengan ese nombre
+        List<Producte> allByName = repositori.getProductsByName(nombre);
+        //listarlos
+        for (Producte producte : allByName) {
+            System.out.println(producte);
+        }
+        System.out.println("Productos con nombre " + nombre + " : " + allByName.size());
+    }
+
+    private void BorrarProductosByPrecio(RepositoriProductesDAO repositori) {
+        System.out.println("Que precio quieres de limite para borrar");
+        int precioLimite = scanner.nextInt();
+        
+        int borrados = repositori.deleteByPrecioLimite(precioLimite);
+        if (borrados == 0)
+        {
+            System.out.println("No se ha boorado nada");
+        }
+        else
+        {
+            System.out.println("Se han borrado " + borrados);
         }
     }
 }
