@@ -61,14 +61,14 @@ public class VistaConsola {
     }
 
     private void mostrarMenu() {
-        System.out.println("\n--- GESTIÃ“ DE PRODUCTES ---");
+        System.out.println("\n--- GESTIÓ DE PRODUCTES ---");
         System.out.println("1. Afegir producte");
         System.out.println("2. Llistar productes");
         System.out.println("3. Cercar producte per ID");
         System.out.println("4. Eliminar producte (Casa)");
         System.out.println("5. Buscar productos con mismo nombre (Casa)");        
         System.out.println("0. Sortir");
-        System.out.print("Escull una opciÃ³: ");
+        System.out.print("Escull una opció: ");
     }
 
     private void afegirProducte(RepositoriProductesDAO repositori)  {
@@ -98,10 +98,9 @@ public class VistaConsola {
                 System.out.println("No se ha añadido el producto: " 
                 + p); //toString
             }
-            
-
         } catch (RepositoriPleException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            System.out.println("ERROR: " 
+                    + e.getMessage());
         }
         catch (IdNegativaException e) {
             System.out.println("Id erronea " + e.getMessage());
