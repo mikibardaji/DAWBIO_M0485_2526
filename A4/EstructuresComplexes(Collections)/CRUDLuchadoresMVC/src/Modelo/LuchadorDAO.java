@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ public class LuchadorDAO {
     List<Luchador> BattleRoyale;
 
     public LuchadorDAO() {
-        this.BattleRoyale = new ArrayList<>();
+        this.BattleRoyale = new LinkedList<>();
         anyadirProductosPrueba();
     }
 
