@@ -92,14 +92,16 @@ Una empresa rep paquets. Cada paquet té un **Codi de Barres** (String) i un **P
 
 1.  Crea el Map adequat segons la teoria.
 2.  Afegeix: `"P01" -> "Monitor"`, `"P02" -> "Teclat"`, `"P03" -> "Ratolí"`.
-3.  Imprimeix el Map. Què observes?
+3.  Imprimeix el Map, item a item. Què  observes respecte al llistats?.
+4.  Consulta si tens un producte P06. Que faries perque et mostres la frase "No hi ha producte", en aquests casos (sigui P06, P07, etc.. )
 
 ### Exercici 2: L'Agenda Automàtica
 Volem guardar contactes. La clau és el **Nom** i el valor és el **Telèfon**. L'usuari vol que l'agenda estigui sempre ordenada alfabèticament sense fer servir cap mètode `sort()`.
 
 1.  Crea el Map adequat segons la teoria.
 2.  Afegeix: `"Zaira"`, `"Albert"` i `"Berta"`.
-3.  Mostra el resultat. Què passa si fas un `.put()` sobre `"Albert"` amb un telèfon nou?
+3.  Mostra el resultat.
+4.  Què passa si fas un `.put()` sobre `"Albert"` amb un telèfon nou?
 
 ### Exercici 3: El Comptador de Paraules (Repte de lògica)
 Donada la següent llista, compta quantes vegades apareix cada fruita:  
