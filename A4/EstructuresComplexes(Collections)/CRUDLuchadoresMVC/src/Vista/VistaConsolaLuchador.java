@@ -25,29 +25,16 @@ public class VistaConsolaLuchador {
     {   
         /* Crear una variable pel model de dades*/
         LuchadorDAO repositori = new LuchadorDAO();
+        Menu menuLuchador = new Menu("Mantenimiento Luchadores");
+        anyadirOpcionesMenu(menuLuchador);
         int opcion=0;
         do {
-            mostrarMenu();
+            menuLuchador.mostrarMenu();
 
             boolean valorEntero = false;
                 
-                do{
-                    try
-                        {
-                            opcion = sc.nextInt();
-                            valorEntero = true;
-                            sc.nextLine();
-                        }
-                    catch(InputMismatchException ex)
-                    {
-                          System.out.println("? Debes introducir un número.");
-                          sc.nextLine();
-                    }
-                }while(!valorEntero);
+                opcion = menuLuchador.llegirOpcioValida();
 
-                if (opcion < 1 || opcion > 8) {
-                    System.out.println("? Opción no válida. Debe ser entre 1 y 8.");
-                } else {
                     switch (opcion) {
                         case 1:
                             System.out.println("? Alta Luchador.");
@@ -62,42 +49,25 @@ public class VistaConsolaLuchador {
                             borrarLuchador(repositori);
                             break;
                         case 4:
-                            System.out.println("? Listar Luchadores.");
-                            //listarLuchadoresPeso(mundial);
+                            System.out.println("? Listar Luchadores que no superen el peso.");
+                            listarLuchadoresPeso(repositori);
                             break;
                         case 5:
                             System.out.println("? Alta en posicion elegida");
-                            //anyadirLuchadorPosicion(mundial);
+                            anyadirLuchadorPosicion(repositori);
                             break;                            
                         case 6:
-                            //cambiarNombre(mundial);
+                            cambiarNombre(repositori);
                             break;
-                        case 7:
-                            //System.out.println("nueva opcion");
-                            break;
-                        case 8:
-                            System.out.println("? Saliendo del programa...");
-                            break;
+                       // case 8: no hace falta controlarla
+                      //      System.out.println("? Saliendo del programa...");
+                      //      break;
                     }
-                }
-        } while (opcion != 8);
+                
+        } while (opcion != menuLuchador.getOpcioSalida());
         
+        System.out.println("? Saliendo del programa...");
         sc.close();
-        
-        
-    }
-
-    private static void mostrarMenu() {
-        System.out.println("\n===== MENÚ =====");
-        System.out.println("1. Alta Luchador");
-        System.out.println("2. Listar todos Luchadores");
-        System.out.println("3. Borrar Luchador");
-        System.out.println("4. Listar Luchadores por categoria peso");
-        System.out.println("5. Añadir Luchador en posicion elegida");
-        System.out.println("6. Cambiar nombre luchador (pedir idLicencia)");
-        System.out.println("7. nueva opcion");
-        System.out.println("8. Salir");
-        System.out.print("Elige una opción: ");
     }
 
     private void altaLuchadores(LuchadorDAO repositori) {
@@ -140,6 +110,7 @@ public class VistaConsolaLuchador {
         int num=1;
         for (Luchador Wrestler : allWrestlers) {
             System.out.println(num + "-" + Wrestler);
+            num++;
         }
         System.out.println("Mostrados: " + allWrestlers.size());
     }
@@ -170,8 +141,79 @@ public class VistaConsolaLuchador {
             System.out.println("Se ha borrado " + wrestlerBorrado);
         }
                 
+ 
+    }
+
+    private void listarLuchadoresPeso(LuchadorDAO repositori) {
+        System.out.println("Pon el peso maximo de los luchadores");
+        int peso = sc.nextInt();
         
+        List<Luchador> WrestlerByPeso = repositori.damiIlotatoriConPesoMismo(peso);
+        System.out.println("Luchadores que no superan " + peso + " kg. ");
+        for (Luchador luchador : WrestlerByPeso) {
+            System.out.println(luchador);
+        }
+        System.out.println("Listados: " + WrestlerByPeso.size());  
+    }
+
+    private void anyadirLuchadorPosicion(LuchadorDAO repositori) {
+                  /*pedir datos entrada*/
+        System.out.println("Pon el numero de licencia");
+        int id = sc.nextInt();
+        sc.nextLine(); //limpio el buffer o el que es lo mismo el return
+        System.out.println("Pon el nombre del luchador");
+        String nombre = sc.nextLine();
+        System.out.println("Pon el peso del luchador");
+        int peso = sc.nextInt();
+        sc.nextLine(); //limpio el buffer o el que es lo mismo el return
+        int posicion;
+        Luchador wrestler = new Luchador(id, nombre);
+        try {  
+            wrestler.setPeso(peso);
+            System.out.println("Pon en que posicion quieres al luchador: ");
+            posicion = sc.nextInt()-1; 
+            if (repositori.addLuchadorByPosition(wrestler, posicion))
+            {
+                System.out.println("Luchador añadido en la posicion" + (posicion+1));
+            }
+            {
+                System.out.println("No se ha podido añadir "
+                        + "posiblemente no hay tantos luchadores");
+            }
+            
+        } catch (NotValidWeightException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    //cambiar nombre y pido licencia
+    private void cambiarNombre(LuchadorDAO repositori) {
+        System.out.println("Pon el numero de licencia del luchador que cambias nombre");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Pon el nuevo nombre luchador ");
+        String nombre = sc.nextLine();
+        Luchador updateFake = new Luchador(id, nombre);
+        if (repositori.updateNombreById(updateFake))
+        {
+            System.out.println("He cambiado el nombre");
+        }
+        else
+        {
+            System.out.println("No habia luchador con este id");
+        }
         
-        
+    }
+
+
+    private void anyadirOpcionesMenu(Menu menuLuchador) {
+        menuLuchador.afegirOpcio("Alta Luchador");
+        menuLuchador.afegirOpcio("Listar todos Luchadores");
+        menuLuchador.afegirOpcio("Borrar Luchador");
+        menuLuchador.afegirOpcio("Listar Luchadores por categoria peso");
+        menuLuchador.afegirOpcio("Añadir Luchador en posicion elegida");
+        menuLuchador.afegirOpcio("Cambiar nombre luchador (pedir idLicencia)");
+        menuLuchador.afegirOpcio("Salir");
+        menuLuchador.setOpcioSalida(7); //salida
     }
 }

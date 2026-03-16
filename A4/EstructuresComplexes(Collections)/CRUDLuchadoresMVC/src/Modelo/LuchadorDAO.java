@@ -6,6 +6,8 @@ package Modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,8 +22,26 @@ public class LuchadorDAO {
     }
 
     private void anyadirProductosPrueba() {
-        System.out.println("Añadiendo datos prueba si hay... ");
-        
+        try {
+            System.out.println("Añadiendo datos prueba si hay... ");
+            Luchador ejemplo = new Luchador(2, "Topuria");
+            ejemplo.setPeso(100);
+            BattleRoyale.add(ejemplo);
+            ejemplo = new Luchador(3, "Joan");
+            ejemplo.setPeso(88);
+            BattleRoyale.add(ejemplo);
+            ejemplo = new Luchador(10, "Goku");
+            ejemplo.setPeso(74);
+            BattleRoyale.add(ejemplo);
+            ejemplo = new Luchador(99, "Vegeta");
+            ejemplo.setPeso(64);
+            BattleRoyale.add(ejemplo);
+            ejemplo = new Luchador(50, "Musculator");
+            ejemplo.setPeso(63);      
+            BattleRoyale.add(ejemplo);
+        } catch (NotValidWeightException ex) {
+            System.err.println("PEso no valido " + ex.getMessage());
+        }
     }
 
     public boolean addLuchador(Luchador wrestler) {
@@ -56,6 +76,47 @@ public class LuchadorDAO {
         }
         
     }
+
+    public List<Luchador> damiIlotatoriConPesoMismo(int peso) {
+        List<Luchador> selec = new ArrayList<>();
+        for (Luchador fighter : BattleRoyale) {
+            if (fighter.getPeso()<=peso)
+            {
+                selec.add(fighter);
+            }
+        }
+        return selec; 
+    }
+
+    public boolean addLuchadorByPosition(Luchador wrestler, int posicion) { //throws IndexOutOfBoundsException
+        //validar que la posicion sea positiva o 0
+        try
+        {
+            BattleRoyale.add(posicion, wrestler);
+            return true; //no ha dado indexOutOfbounds
+        }
+        catch(IndexOutOfBoundsException ex)
+        {
+            return false;
+        }
+        
+    }
+
+    public boolean updateNombreById(Luchador updateFake) {
+
+        int posicionFind = BattleRoyale.indexOf(updateFake);
+        if (posicionFind!=-1)
+        {
+            BattleRoyale.get(posicionFind).setNombre(updateFake.getNombre());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     
     
 }
