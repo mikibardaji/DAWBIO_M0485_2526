@@ -1,11 +1,11 @@
 # GUIA COMPLETA: ELS MAPS A JAVA
-**Assignatura:** Programació  
-**Objectiu:** Entendre l'estructura de dades Map i les seves diferents implementacions.
+
+![Esquema de la jerarquia de Collections](collectionsoverview.png)
 
 ---
 
 ## 1. Introducció: Què és un Map?
-Fins ara heu utilitzat llistes (`ArrayList`, `LinkedList`) on cada element té una posició o índex (0, 1, 2...). Un **Map** és una estructura que guarda parelles de **Clau-Valor (Key-Value)**.
+Fins ara hem utilitzat llistes (`ArrayList`, `LinkedList`) on cada element té una posició o índex (0, 1, 2...). Un **Map** és una estructura que guarda parelles de **Clau-Valor (Key-Value)**.
 
 * **Clau (Key):** És l'identificador únic (com un DNI o un codi de barres). No es pot repetir.
 * **Valor (Value):** És la dada associada a la clau. Es pot repetir.
