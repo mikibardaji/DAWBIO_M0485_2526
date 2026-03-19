@@ -48,6 +48,16 @@ public class TeoriaMaps {
                 Double value = nevera.get(aliment);
                 System.out.println("[ Key: "+ aliment + "][ Value:" + value +"]");
         }
+        
+        //especie def foreac
+        for (Map.Entry<String, Double> aliment : nevera.entrySet()) {
+            System.out.println("[ Key: "+ aliment.getKey() + "][ Value:" + aliment.getValue() +"]");
+        }
+        
+        nevera.
+        
+        
+        
     }
     
 }
