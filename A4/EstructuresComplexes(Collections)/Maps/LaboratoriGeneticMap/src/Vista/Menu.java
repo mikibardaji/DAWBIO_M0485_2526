@@ -59,7 +59,7 @@ public class Menu {
                     valid   = true;
                     return opcio;
                 } else {
-                    System.out.println("Opció no vàlida. Torna-ho a intentar.");
+                    System.err.println("Opció no vàlida. Torna-ho a intentar.");
                     valid = false;
                 }
             } catch (InputMismatchException e) {
