@@ -6,10 +6,12 @@ package Vista;
 
 import Modelo.SequenciaGenetica;
 import Modelo.SequenciaGeneticaDao;
-import java.util.ArrayList;
-import java.util.Collection;
+import Modelo.idBlankException;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -119,13 +121,43 @@ public class VistaPrincipal {
          double media = repositori.calcularMitjanaLongitud();
          System.out.println("La mitja de totes les mostres es "
          + media);
+        
     }
 
+    /* vull cambiar la longitud de una sequencia donada*/
     private void actualitzarSequencia(SequenciaGeneticaDao repositori) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+        System.out.println("Dis-me el codi sequencia");
+        String id = sc.nextLine().toUpperCase();
+         System.out.println("Dis-me la longitud");
+        int longitud = sc.nextInt();
+        
+        //SequenciaGenetica updateFake = new SequenciaGenetica(id, "", longitud);
+        if (repositori.updateLongitud(id,longitud))
+        {
+            System.out.println("Sequencia cambiada");
+        }
+        else
+            System.out.println("No hi ha cap sequencia amb el id " + id);
+        } catch(InputMismatchException e)
+        {
+            System.out.println("Longitud tindra que ser numerica");
+            System.out.println(e.getMessage());
+        }
+        
     }
 
     private void eliminarSequencia(SequenciaGeneticaDao repositori) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Dis-me el codi sequencia");
+        String id = sc.nextLine().toUpperCase();
+         try {
+             SequenciaGenetica deleted = repositori.deleteSequencia(id);
+             if (deleted!=null)
+                System.out.println("He borrat " + deleted);
+             else
+                 System.out.println("No existeix la sequencia " + id);
+         } catch (idBlankException ex) {
+             System.out.println(ex.getMessage());
+         }
     }
 }

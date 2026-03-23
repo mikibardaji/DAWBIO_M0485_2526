@@ -22,7 +22,7 @@ public class SequenciaGeneticaDao {
     
     public SequenciaGeneticaDao() {
         proves = new HashMap<>();
-        //afegimdadesprova
+        afegimdadesprova();
     }    
 
     /*
@@ -41,8 +41,6 @@ Si l'ID és nou, l'afegeix al mapa i retorna true.
             proves.put(anyadir.getIdMostra(), anyadir);
             return true;
         }
-        
-        
     }
 
     public Collection<SequenciaGenetica> obtenirTotes() {
@@ -86,6 +84,41 @@ Si l'ID és nou, l'afegeix al mapa i retorna true.
         } 
         double media = (double) longTotal/proves.size();
         return media;
+    }
+
+    private void afegimdadesprova() {
+        /*
+            private String idMostra;
+    private String organisme;
+    private int longitudCadena;
+        */
+        proves.put("S1", new SequenciaGenetica("S1","Humà",100));
+        proves.put("S2", new SequenciaGenetica("S2","Humà",150));
+        proves.put("S3", new SequenciaGenetica("S3","Humà",300));
+        proves.put("S4", new SequenciaGenetica("S4","Gos",150));        
+    }
+
+    public boolean updateLongitud(String id, int longitud) {
+        SequenciaGenetica found = proves.get(id);
+        if (found!=null)
+        {
+            found.setLongitudCadena(longitud);
+            proves.put(id, found);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public SequenciaGenetica deleteSequencia(String id) throws idBlankException{
+        if (!id.isEmpty())
+        {
+            return proves.remove(id);
+        }
+        else
+        {
+            throw new idBlankException();
+        }
     }
     
 }
