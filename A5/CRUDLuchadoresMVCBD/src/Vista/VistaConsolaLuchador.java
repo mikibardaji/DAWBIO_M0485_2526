@@ -40,7 +40,7 @@ public class VistaConsolaLuchador {
                         break;
                     case 2:
                         System.out.println("? Listar todos Luchadores");
-                        //listarLuchadores(repositori);
+                        listarLuchadores(repositori);
                         break;
                     case 3:
                         System.out.println("? Borrar Luchador");
@@ -84,4 +84,17 @@ public class VistaConsolaLuchador {
         menuLuchador.afegirOpcio("Salir");
         menuLuchador.setOpcioSalida(7); //salida
     }
+
+    //VIIIIIsta
+    private void listarLuchadores(LuchadorDAOBD repositori) {
+        System.out.println("Lista luchadores dentro");
+        //llmar a un metodo del modelo (DAO) que devuelva todos los luchadores
+            //SELECT * from  => resultset
+            //el mmismo metodo lo guaardara en list luchadores
+            //retornara la lista
+        //mostrar por consola
+        
+    }
+
+
 }
