@@ -13,62 +13,42 @@ public class Luchador {
     private String nombre;
     private int peso;
 
-    public Luchador(int idLicencia, String nombre) {
+    public Luchador(int idLicencia, String nombre, int peso) {
         this.idLicencia = idLicencia;
         this.nombre = nombre;
-        this.peso = 1;  //como el setter lanza una excepcion
-        //no me interesa llamarlo porque si saltara la excepcion
-        //el objeto en el constructor no se crearia
+        this.peso = peso;
     }
 
     public int getIdLicencia() {
         return idLicencia;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public int getPeso() {
-        return peso;
-    }
-
     public void setIdLicencia(int idLicencia) {
         this.idLicencia = idLicencia;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setPeso(int peso) throws NotValidWeightException {
-        if (peso>0 && peso <=200)
-        {
-            this.peso = peso;
-        }
-        else
-            throw new NotValidWeightException();
+    public int getPeso() {
+        return peso;
+    }
+
+    public void setPeso(int peso) {
+        this.peso = peso;
     }
 
     @Override
     public String toString() {
-        return  nombre +  " licencia " + idLicencia+  " con un peso de " + peso +  " kg.";
+        return nombre + "tiene la licencia" + idLicencia + " y su peso es" + peso + " kg.";
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Luchador)) {
-            return false;
-        }
-        final Luchador other = (Luchador) obj;
-        return this.idLicencia == other.idLicencia;
-    }
+
     
     
 }

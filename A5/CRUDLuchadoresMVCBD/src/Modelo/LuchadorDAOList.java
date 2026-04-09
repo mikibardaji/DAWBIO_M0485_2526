@@ -14,14 +14,14 @@ import java.util.logging.Logger;
  *
  * @author mabardaji
  */
-public class LuchadorDAO {
+public class LuchadorDAOList {
     List<Luchador> BattleRoyale;
 
-    public LuchadorDAO() {
+    public LuchadorDAOList() {
         this.BattleRoyale = new LinkedList<>();
-        anyadirProductosPrueba();
+        //anyadirProductosPrueba();
     }
-
+/*
     private void anyadirProductosPrueba() {
         try {
             System.out.println("Añadiendo datos prueba si hay... ");
@@ -44,7 +44,7 @@ public class LuchadorDAO {
             System.err.println("PEso no valido " + ex.getMessage());
         }
     }
-
+*/
     public boolean addLuchador(Luchador wrestler) {
         /*validacion si hace falta*/
         if (!BattleRoyale.contains(wrestler))

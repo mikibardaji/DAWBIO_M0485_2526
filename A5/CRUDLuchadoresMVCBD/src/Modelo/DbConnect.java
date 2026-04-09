@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Persistencia;
+package Modelo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,9 +15,9 @@ public class DbConnect {
     static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String PROTOCOL = "jdbc:mysql:";
     static final String HOST = "127.0.0.1"; //localhost //direcció servidor
-    static final String BD_NAME = "dbcountry";
-    static final String USER = "usrcountry";
-    static final String PASSWORD = "pswcountry";
+    static final String BD_NAME = "wrestling";
+    static final String USER = "admin_wrestling";
+    static final String PASSWORD = "TuPasswordSeguro123!";
     static final String PARAMS = "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     
     

@@ -6,6 +6,8 @@ package crudluchadoresmvc;
 
 import Vista.VistaConsolaLuchador;
 
+
+
 /**
  *
  * @author mabardaji

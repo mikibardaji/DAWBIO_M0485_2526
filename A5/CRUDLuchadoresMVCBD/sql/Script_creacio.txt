@@ -1,0 +1,53 @@
+-- 1. CREACIÓ DE LA BASE DE DADES
+CREATE DATABASE IF NOT EXISTS wrestling;
+USE wrestling;
+
+-- 2. CREACIÓ DE LA TAULA
+CREATE TABLE IF NOT EXISTS luchadores (
+    idLicencia INT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    peso INT
+);
+
+-- 3. CONFIGURACIÓ DE L'USUARI
+-- Crea l'usuari 'admin_wrestling' amb la seva contrasenya
+CREATE USER IF NOT EXISTS 'admin_wrestling'@'localhost' IDENTIFIED BY 'TuPasswordSeguro123!';
+
+-- Atorga tots els privilegis sobre la base de dades 'wrestling'
+GRANT ALL PRIVILEGES ON wrestling.* TO 'admin_wrestling'@'localhost';
+
+-- Aplica els canvis de permisos
+FLUSH PRIVILEGES;
+
+-- 4. INSERCIÓ DELS 30 LLUITADORS (ANYS 80-90)
+INSERT INTO luchadores (idLicencia, nombre, peso) VALUES
+(1, 'Hulk Hogan', 302),
+(2, 'Ultimate Warrior', 280),
+(3, 'Macho Man Randy Savage', 237),
+(4, 'André the Giant', 520),
+(5, 'Ric Flair', 243),
+(6, 'Bret "The Hitman" Hart', 235),
+(7, 'Shawn Michaels', 225),
+(8, 'The Undertaker', 309),
+(9, 'Jake "The Snake" Roberts', 249),
+(10, 'Rowdy Roddy Piper', 230),
+(11, 'Ted DiBiase (Million Dollar Man)', 260),
+(12, 'Mr. Perfect', 257),
+(13, 'The British Bulldog', 260),
+(14, 'Yokozuna', 589),
+(15, 'Bam Bam Bigelow', 390),
+(16, 'Jimmy "Superfly" Snuka', 235),
+(17, 'The Iron Sheik', 258),
+(18, 'Sgt. Slaughter', 310),
+(19, 'Big Boss Man', 315),
+(20, 'Razor Ramon', 287),
+(21, 'Diesel', 328),
+(22, 'Lex Luger', 275),
+(23, 'Hacksaw Jim Duggan', 270),
+(24, 'Greg "The Hammer" Valentine', 243),
+(25, 'Tito Santana', 244),
+(26, 'The Mountie', 245),
+(27, 'Earthquake', 468),
+(28, 'Doink the Clown', 243),
+(29, 'Tatanka', 285),
+(30, 'Owen Hart', 227);

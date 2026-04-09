@@ -5,7 +5,7 @@
 package Vista;
 
 import Persistencia.Country;
-import Persistencia.DbConnect;
+import Modelo.DbConnect;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,6 +30,7 @@ public class VistaConsola {
             printAllCountriesPrepared(5, 5000);
             insertCountry();
             printAllCountriesPrepared(1, 1);
+            deleteCountriesMasId(41);
 
         } catch (ClassNotFoundException ex) {
             System.err.println(ex.getMessage());
