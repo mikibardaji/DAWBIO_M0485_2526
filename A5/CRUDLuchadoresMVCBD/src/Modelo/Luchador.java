@@ -45,7 +45,7 @@ public class Luchador {
 
     @Override
     public String toString() {
-        return nombre + "tiene la licencia" + idLicencia + " y su peso es" + peso + " kg.";
+        return nombre + "  su licencia es " + idLicencia + " y pesa " + peso + " kg.";
     }
 
 
