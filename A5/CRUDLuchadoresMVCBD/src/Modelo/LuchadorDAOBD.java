@@ -6,6 +6,7 @@ package Modelo;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 /**
  *
@@ -91,6 +92,38 @@ public class LuchadorDAOBD {
             return confBorrado;
         }
         return 0;
+    }
+
+    public List<Luchador> filtrarLuchadorPeso(int pesoMax) throws SQLException {
+        //validacions respecte al enmatzematge 
+        List<Luchador> todos = new LinkedList<>();
+        conn = DbConnect.getConnection();
+        if(conn!=null){
+            String query = "SELECT * FROM LUCHADORES "
+                    + " WHERE PESO <= ?";
+            System.out.println(query);
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, pesoMax);
+            ResultSet cursor = pstmt.executeQuery();
+            while (cursor.next())
+            {
+                int id = cursor.getInt("idLicencia");
+                String name = cursor.getString("nombre");
+                int peso = cursor.getInt("peso");
+                
+                Luchador escogido = new Luchador(id, name, peso);
+                todos.add(escogido);
+            }
+            cursor.close();
+            pstmt.close();
+            conn.close();
+            return todos;
+        }
+        else
+        {
+            throw new SQLException("Error en coneixion");
+        }
+        
     }
 
 

@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -47,11 +49,11 @@ public class VistaConsolaLuchador {
                         break;
                     case 3:
                         System.out.println("? Borrar Luchador");
-                        //borrarLuchador(repositori);
+                        borrarLuchador(repositori);
                         break;
                     case 4:
                         System.out.println("? Listar Luchadores que no superen el peso.");
-                        //listarLuchadoresPeso(repositori);
+                        listarLuchadoresPeso(repositori);
                         break;
                     case 5:
                         System.out.println("? Alta en posicion elegida");
@@ -93,13 +95,7 @@ public class VistaConsolaLuchador {
        
         try {
             List<Luchador> listaluchadores = repositori.getAll();
-            
-            for (Luchador guerrero : listaluchadores) {
-                System.out.println(guerrero);
-            }
-            
-            System.out.println("Luchadores mostrados "+ listaluchadores.size());
-            
+            mostrarResultados(listaluchadores, "Todos los luchadores");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -161,5 +157,37 @@ private void borrarLuchador(LuchadorDAOBD repositori) {
             System.err.println(ex.getMessage());
         }
         
+    }
+
+    private void listarLuchadoresPeso(LuchadorDAOBD repositori) {
+        //pedir datos entrada
+         System.out.print("Inserta peso maximo de los luchadores: ");
+         int pesoMax = sc.nextInt();
+         //validaciones de les dades que ens han suministrat.
+         if (pesoMax > 0)
+         {
+             try {
+                 //cridarem al model
+                 List<Luchador> luchadoresPermitidos = repositori.filtrarLuchadorPeso(pesoMax);
+                 mostrarResultados(luchadoresPermitidos, "Luchadores que no superan el peso " + pesoMax );
+                 
+             } catch (SQLException ex) {
+                 System.err.println(ex.getMessage());
+             }
+             
+         }
+         else
+         { //throw exception 
+             System.err.println("Peso debe ser positivo");  
+         }
+         
+    }
+
+    private void mostrarResultados(List<Luchador> luchadoresPermitidos, String titulo) {
+        System.out.println(titulo);
+                 for (Luchador wrestler : luchadoresPermitidos) {
+                     System.out.println(wrestler);
+                 }
+        System.out.println("Luchadores mostrados: " + luchadoresPermitidos.size());
     }
 }
