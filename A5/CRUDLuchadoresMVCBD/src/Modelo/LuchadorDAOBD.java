@@ -25,7 +25,7 @@ public class LuchadorDAOBD {
        conn = DbConnect.getConnection();
        
         if (conn != null) {
-          String query = "SELECT * FROM LUCHADORES";
+          String query = "SELECT * FROM luchadores";
           
             PreparedStatement pstmt = conn.prepareStatement(query);
             //si hay una consulta tendria que hacerse un pstmt.setString etc.
@@ -99,7 +99,7 @@ public class LuchadorDAOBD {
         List<Luchador> todos = new LinkedList<>();
         conn = DbConnect.getConnection();
         if(conn!=null){
-            String query = "SELECT * FROM LUCHADORES "
+            String query = "SELECT * FROM luchadores "
                     + " WHERE PESO <= ?";
             System.out.println(query);
             PreparedStatement pstmt = conn.prepareStatement(query);
