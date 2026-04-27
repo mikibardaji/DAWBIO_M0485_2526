@@ -4,6 +4,8 @@
  */
 package View;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.HeadlessException;
 import javax.swing.JFrame;
 
@@ -18,6 +20,7 @@ public class FinestraPrincipal extends JFrame {
     public FinestraPrincipal() throws HeadlessException {
         //inicialitza la part superior de la finestra
         initComponentsTitle();
+        initContainer(); //ficar components a la part central
     }
 
     private void initComponentsTitle() {
@@ -31,6 +34,15 @@ public class FinestraPrincipal extends JFrame {
         //ficar la finestra centrada
         setLocationRelativeTo(null); //centrada
         
+    }
+
+    private void initContainer() {
+        Container panelPrincipal = this.getContentPane();
+        panelPrincipal.setLayout(new BorderLayout());
+        
+        PanellDades datosEntrada = new PanellDades();
+        
+        panelPrincipal.add(datosEntrada,BorderLayout.CENTER);
     }
     
     
