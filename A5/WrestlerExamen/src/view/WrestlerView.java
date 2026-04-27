@@ -6,6 +6,8 @@ import model.Wrestler;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WrestlerView {
     private WrestlerDAO dao;
@@ -24,6 +26,8 @@ public class WrestlerView {
             }
         } catch (SQLException ex) {
             System.out.println("Exception error: " + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver error: " + ex.getMessage());
         }
     }
 
