@@ -14,7 +14,7 @@ public class WrestlerDAO {
     public WrestlerDAO() throws SQLException, ClassNotFoundException {
         DbConnect.loadDriver();
         conn = DbConnect.getConnection();
-        createTable();
+        //createTable();
     }
 
     //no era necessari pero el deixem aqui
@@ -42,7 +42,6 @@ public class WrestlerDAO {
         String selectSql = "SELECT id FROM wrestlers WHERE id = ?";
         
         PreparedStatement selectStmt = null;
-    
         ResultSet rs = null;
         try {
             
@@ -67,7 +66,9 @@ public class WrestlerDAO {
 
     private void inserirWrestler(Wrestler wrestler) throws SQLException {
         PreparedStatement insertStmt = null;
-        String insertSql = "INSERT INTO wrestlers (id, name, weight, category, wins, total_fights) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertSql = "INSERT INTO wrestlers "
+                + "(id, name, weight, category, wins, total_fights) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
         try {
             insertStmt = conn.prepareStatement(insertSql);
             insertStmt.setInt(1, wrestler.getId());
@@ -83,7 +84,9 @@ public class WrestlerDAO {
     }
 
     private void actualitzarWrestler(Wrestler wrestler) throws SQLException {
-        String updateSql = "UPDATE wrestlers SET name = ?, weight = ?, category = ?, wins = ?, total_fights = ? WHERE id = ?";
+        String updateSql = "UPDATE wrestlers "
+                + "SET name = ?, weight = ?, category = ?, wins = ?, total_fights = ? "
+                + "WHERE id = ?";
         PreparedStatement updateStmt = null;
         try {
             updateStmt = conn.prepareStatement(updateSql);
@@ -95,14 +98,16 @@ public class WrestlerDAO {
             updateStmt.setInt(6, wrestler.getId());
             updateStmt.executeUpdate();
         
-        } finally {
-            if (updateStmt != null) try { updateStmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-        }
+        } finally { //s'executa sempre encara que falli
+            if (updateStmt != null) {
+            updateStmt.close(); 
+            }} 
     }
 
     public List<Wrestler> getAllWrestlers() throws SQLException {
         List<Wrestler> wrestlers = new ArrayList<>();
         String sql = "SELECT * FROM wrestlers";
+        // opcio 2 String sql = "SELECT *, (wins/totalFights * 100) as Porcentaje FROM wrestlers";
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -155,8 +160,10 @@ public class WrestlerDAO {
         return null;
     }
 
-    public void updateWrestlerStats(int id, int wins, int totalFights) throws SQLException {
-        String sql = "UPDATE wrestlers SET wins = ?, total_fights = ? WHERE id = ?";
+    public int updateWrestlerStats(int id, int wins, int totalFights) throws SQLException {
+        String sql = "UPDATE wrestlers "
+                + " SET wins = ?, total_fights = ? "
+                + " WHERE id = ?";
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -164,7 +171,7 @@ public class WrestlerDAO {
             stmt.setInt(1, wins);
             stmt.setInt(2, totalFights);
             stmt.setInt(3, id);
-            stmt.executeUpdate();
+            return stmt.executeUpdate();
         } finally {
             if (stmt != null) stmt.close();
             if (conn != null) conn.close();
@@ -174,7 +181,7 @@ public class WrestlerDAO {
     public List<Wrestler> getWrestlersByCategory(String category) throws SQLException {
         List<Wrestler> wrestlers = new ArrayList<>();
         String sql = "SELECT * FROM wrestlers WHERE category = ? ORDER BY wins DESC";
-        Connection conn = null;
+       
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {

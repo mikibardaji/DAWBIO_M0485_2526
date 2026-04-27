@@ -5,6 +5,8 @@
  */
 package wrestlerexamen;
 
+import view.WrestlerView;
+
 /**
  *
  * @author usuari
@@ -15,7 +17,8 @@ public class WrestlerExamen {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        WrestlerView app = new WrestlerView();
+        app.run();
     }
     
 }

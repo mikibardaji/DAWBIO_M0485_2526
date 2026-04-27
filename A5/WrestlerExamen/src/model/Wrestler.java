@@ -63,5 +63,6 @@ public class Wrestler {
         //podrieu fer amb System.out.println a la vista, però així es centralitza el format en un sol lloc
         return String.format("ID: %d, Nom: %s, Pes: %.2f kg, Categoria: %s, Victòries: %d, Total Lluites: %d, %% Victòries: %.2f",
                 id, name, weight, category, wins, totalFights, getWinPercentage());
+        //return "id " + id  + " nombre " + name + " .... " + getWinPercentage());
     }
 }

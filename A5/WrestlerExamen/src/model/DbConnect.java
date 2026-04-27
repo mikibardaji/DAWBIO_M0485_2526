@@ -17,8 +17,8 @@ public class DbConnect {
     static final String PROTOCOL = "jdbc:mysql:";
     static final String HOST = "127.0.0.1"; //localhost
     static final String BD_NAME = "concesionarios";
-    static final String USER = "adminC";
-    static final String PASSWORD = "123";
+    static final String USER = "root";
+    static final String PASSWORD = "";
     static final String PARAMS = "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     
     

@@ -61,6 +61,7 @@ public class WrestlerView {
 
     private void addWrestler() {
         try {
+            //dades d'entrada
             Wrestler wrestler = demanarDadesLluitador();
             boolean inserted = dao.insertOrUpdateWrestler(wrestler);
             if (inserted) {
@@ -68,7 +69,7 @@ public class WrestlerView {
             } else {
                 System.out.println("Lluitador actualitzat correctament.");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error afegint lluitador: " + e.getMessage());
         }
     }
@@ -103,10 +104,11 @@ public class WrestlerView {
 
             if (w1 == null || w2 == null) {
                 System.out.println("Un o ambdós lluitadors no existeixen.");
-                return;
-            }
 
-            // Simulate combat
+            }
+            else
+            {
+                // Simulate combat
             Random rand = new Random();
             int min1, min2;
             if (w1.getWins() > 50) 
@@ -136,10 +138,13 @@ public class WrestlerView {
             w1.setTotalFights(w1.getTotalFights() + 1);
             w2.setTotalFights(w2.getTotalFights() + 1);
 
-            dao.updateWrestlerStats(w1.getId(), w1.getWins(), w1.getTotalFights());
-            dao.updateWrestlerStats(w2.getId(), w2.getWins(), w2.getTotalFights());
+            int act1 = dao.updateWrestlerStats(w1.getId(), w1.getWins(), w1.getTotalFights());
+            int act2 = dao.updateWrestlerStats(w2.getId(), w2.getWins(), w2.getTotalFights());
 
             showCombatResult(w1, w2, score1, score2, winner);
+                
+            }
+            
         } catch (Exception e) {
             System.out.println("Error simulant el combat: " + e.getMessage());
         }
@@ -177,12 +182,16 @@ public class WrestlerView {
     public void showWrestlers(List<Wrestler> wrestlers) {
         if (wrestlers.isEmpty()) {
             System.out.println("No hi ha lluitadors registrats.");
-            return;
         }
-        System.out.println("\n=== Llistat de Lluitadors ===");
-        for (Wrestler w : wrestlers) {
-            System.out.println(w);
+        else
+        {
+            System.out.println("\n=== Llistat de Lluitadors ===");
+            for (Wrestler w : wrestlers) {
+                System.out.println(w);
+            }
+            System.out.println("Llistats: " + wrestlers.size());
         }
+        
     }
     
     public int[] getCombatIds() {
