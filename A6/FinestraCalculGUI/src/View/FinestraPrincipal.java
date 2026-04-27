@@ -6,6 +6,7 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.HeadlessException;
 import javax.swing.JFrame;
 
@@ -21,6 +22,7 @@ public class FinestraPrincipal extends JFrame {
         //inicialitza la part superior de la finestra
         initComponentsTitle();
         initContainer(); //ficar components a la part central
+       // pack();
     }
 
     private void initComponentsTitle() {
@@ -37,12 +39,22 @@ public class FinestraPrincipal extends JFrame {
     }
 
     private void initContainer() {
+        //afegim els components del container
+        //en aquest cas, com es disposició diferent
+        //fiquem dos JPanells al container
+        //el primer container es un grid de 3,2
+        //el segon de botons es un grid de 1,4 o flowLayout
+        
         Container panelPrincipal = this.getContentPane();
         panelPrincipal.setLayout(new BorderLayout());
-        
+        panelPrincipal.setPreferredSize(new Dimension(100, 300));
         PanellDades datosEntrada = new PanellDades();
         
         panelPrincipal.add(datosEntrada,BorderLayout.CENTER);
+        PanelBoto botones = new PanelBoto();
+        botones.setPreferredSize(new Dimension(0, 75));
+        panelPrincipal.add(botones,BorderLayout.SOUTH);
+        
     }
     
     
