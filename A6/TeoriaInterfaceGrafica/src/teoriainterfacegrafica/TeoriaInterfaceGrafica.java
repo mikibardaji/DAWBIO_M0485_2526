@@ -26,11 +26,12 @@ public class TeoriaInterfaceGrafica {
         JFrame finestra = new JFrame("Primera finestra de windows");
         finestra.setSize(400, 300);
         
+        //la acció que es feia al apretar la X de la finestra
         finestra.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         
-        //disposicioBorderLayout(finestra);
-        disposicioGridLayout(finestra);
+        disposicioBorderLayout(finestra);
+        //disposicioGridLayout(finestra);
         //mostrar-lo o display
         finestra.pack();
         finestra.setVisible(true);
