@@ -77,7 +77,7 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         
         //System.out.println("He capturat la accio");
         String accion = e.getActionCommand();
-        
+        System.out.println(accion);
         String op1 = datosEntrada.getOper1Editable().getText();
         //System.out.println(op1);
         String op2 = datosEntrada.getOper2Editable().getText();
@@ -92,7 +92,11 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
                 break;
             case "-":
                 resultado = dao.resta(op1d, op2d);
-                break;                
+                break;     
+            case "CLEAR":
+                System.out.println("clear");
+                datosEntrada.initValue();
+                break;
         }
         
         datosEntrada.getResultado().setText(String.valueOf(resultado));
@@ -117,7 +121,22 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         botones.getDivide().setActionCommand("/"); //textlliure
         //que servira per saber que hem apretat aquest boto
         botones.getDivide().addActionListener(al);        
-        
+        botones.getClear().setActionCommand("CLEAR");
+        botones.getClear().addActionListener(al);   
+
+        /* un actionListener i codi diferent
+        avantatge, que no fa falta preguntar per el actionCommand
+        desavantatge, que hi ha molt codi, un per cada 
+        actionListener i que quant ho tens que modificar 
+        es més costós
+        botones.getClear().addActionListener(
+        new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 System.out.println("Nou action listener");
+                 datosEntrada.initValue();
+            }
+        });*/
         
         
         

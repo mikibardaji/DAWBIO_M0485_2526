@@ -18,13 +18,14 @@ public class PanelBoto extends JPanel{ //JPÂNEL NO ES UNA FINESTRA
     JButton minus;
     JButton multiply;
     JButton divide;
+    JButton clear;
 
     public PanelBoto() {
         initComponents(); //ficar els components al layout
     }
 
     private void initComponents() {
-        setLayout(new GridLayout(1, 4));
+        setLayout(new GridLayout(1, 5));
         suma = new JButton("+");
         
         suma.setHorizontalAlignment(SwingConstants.CENTER);
@@ -38,6 +39,9 @@ public class PanelBoto extends JPanel{ //JPÂNEL NO ES UNA FINESTRA
         divide = new JButton("/");
         divide.setHorizontalAlignment(SwingConstants.CENTER);           
         add(divide);
+        clear = new JButton("CLS");
+        clear.setHorizontalAlignment(SwingConstants.CENTER);
+        add(clear);
     }
 
     public JButton getSuma() {
@@ -54,6 +58,10 @@ public class PanelBoto extends JPanel{ //JPÂNEL NO ES UNA FINESTRA
 
     public JButton getDivide() {
         return divide;
+    }
+
+    public JButton getClear() {
+        return clear;
     }
     
     
