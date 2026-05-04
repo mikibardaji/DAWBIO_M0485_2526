@@ -11,6 +11,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import model.CalculadoraDAO;
 
 /**
  * Aquesta classe serà la que ens llanci la finestra
@@ -25,8 +26,11 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
     PanellDades datosEntrada;
     //aquesta interface(ActionListener) implementar la captura de la accio als components que vulguem 
     ActionListener al;
+    CalculadoraDAO dao; //null
+    
     
     public FinestraPrincipal()  {
+        dao = new CalculadoraDAO();
         //inicialitza la part superior de la finestra
         initComponentsTitle();
         //que la finestra Jframe sera la que implementa el actionLister
@@ -70,7 +74,29 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("He capturat la accio");
+        
+        //System.out.println("He capturat la accio");
+        String accion = e.getActionCommand();
+        
+        String op1 = datosEntrada.getOper1Editable().getText();
+        //System.out.println(op1);
+        String op2 = datosEntrada.getOper2Editable().getText();
+        //System.out.println(op2);
+        double op1d = Double.parseDouble(op1);
+        double op2d = Double.parseDouble(op2);
+        double resultado=0;
+        switch(accion)
+        {
+            case "+":
+                resultado = dao.suma(op1d, op2d);
+                break;
+            case "-":
+                resultado = dao.resta(op1d, op2d);
+                break;                
+        }
+        
+        datosEntrada.getResultado().setText(String.valueOf(resultado));
+        
     }
 
     /**
@@ -82,7 +108,15 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         botones.getSuma().setActionCommand("+"); //textlliure
         //que servira per saber que hem apretat aquest boto
         botones.getSuma().addActionListener(al);
-        
+        botones.getMinus().setActionCommand("-"); //textlliure
+        //que servira per saber que hem apretat aquest boto
+        botones.getMinus().addActionListener(al);
+        botones.getMultiply().setActionCommand("*"); //textlliure
+        //que servira per saber que hem apretat aquest boto
+        botones.getMultiply().addActionListener(al);
+        botones.getDivide().setActionCommand("/"); //textlliure
+        //que servira per saber que hem apretat aquest boto
+        botones.getDivide().addActionListener(al);        
         
         
         

@@ -17,10 +17,10 @@ import javax.swing.JTextField;
  * JLabel Jlabel
  */
 public class PanellDades extends JPanel{
-    JTextField oper1Editable; //important perque interaccionarem amb ell
+    private JTextField oper1Editable; //important perque interaccionarem amb ell
     //escriurem a dins i voldrem recuperar el seu valor
-    JTextField oper2Editable;
-    JLabel resultado;
+    private JTextField oper2Editable;
+    private JLabel resultado;
     
     
     public PanellDades() {
@@ -44,10 +44,22 @@ public class PanellDades extends JPanel{
         add(resultado);
     }
 
-    private void initValue() {
+    public void initValue() {
         oper1Editable.setText("0.0");
         oper2Editable.setText("0.0");
         resultado.setText("--");
+    }
+
+    public JTextField getOper1Editable() {
+        return oper1Editable;
+    }
+
+    public JTextField getOper2Editable() {
+        return oper2Editable;
+    }
+
+    public JLabel getResultado() {
+        return resultado;
     }
     
     
