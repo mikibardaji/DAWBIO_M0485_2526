@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
  * @author mabardaji
  */
 public class PanelBoto extends JPanel{ //JPÂNEL NO ES UNA FINESTRA
-    JButton add;
+    JButton suma;
     JButton minus;
     JButton multiply;
     JButton divide;
@@ -25,10 +25,10 @@ public class PanelBoto extends JPanel{ //JPÂNEL NO ES UNA FINESTRA
 
     private void initComponents() {
         setLayout(new GridLayout(1, 4));
-        add = new JButton("+");
+        suma = new JButton("+");
         
-        add.setHorizontalAlignment(SwingConstants.CENTER);
-        add(add);
+        suma.setHorizontalAlignment(SwingConstants.CENTER);
+        add(suma);
         minus = new JButton("-");
         minus.setHorizontalAlignment(SwingConstants.CENTER);
         add(minus);
@@ -38,6 +38,22 @@ public class PanelBoto extends JPanel{ //JPÂNEL NO ES UNA FINESTRA
         divide = new JButton("/");
         divide.setHorizontalAlignment(SwingConstants.CENTER);           
         add(divide);
+    }
+
+    public JButton getSuma() {
+        return suma;
+    }
+
+    public JButton getMinus() {
+        return minus;
+    }
+
+    public JButton getMultiply() {
+        return multiply;
+    }
+
+    public JButton getDivide() {
+        return divide;
     }
     
     

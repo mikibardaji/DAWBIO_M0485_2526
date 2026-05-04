@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 /**
@@ -16,13 +18,22 @@ import javax.swing.JFrame;
  * JFRAME -[]x
  * @author mabardaji
  */
-public class FinestraPrincipal extends JFrame {
+public class FinestraPrincipal extends JFrame implements ActionListener{
 
-    public FinestraPrincipal() throws HeadlessException {
+    //declarem els panells aquí perque els voldrem implementar més tard.
+    PanelBoto botones;
+    PanellDades datosEntrada;
+    //aquesta interface(ActionListener) implementar la captura de la accio als components que vulguem 
+    ActionListener al;
+    
+    public FinestraPrincipal()  {
         //inicialitza la part superior de la finestra
         initComponentsTitle();
+        //que la finestra Jframe sera la que implementa el actionLister
+        al = this; // JFRAME implements actionListener
         initContainer(); //ficar components a la part central
        // pack();
+       initListeners();
     }
 
     private void initComponentsTitle() {
@@ -48,12 +59,33 @@ public class FinestraPrincipal extends JFrame {
         Container panelPrincipal = this.getContentPane();
         panelPrincipal.setLayout(new BorderLayout());
         panelPrincipal.setPreferredSize(new Dimension(100, 300));
-        PanellDades datosEntrada = new PanellDades();
+        datosEntrada = new PanellDades();
         
         panelPrincipal.add(datosEntrada,BorderLayout.CENTER);
-        PanelBoto botones = new PanelBoto();
+        botones = new PanelBoto();
         botones.setPreferredSize(new Dimension(0, 75));
         panelPrincipal.add(botones,BorderLayout.SOUTH);
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("He capturat la accio");
+    }
+
+    /**
+     * Servira per ficar listeners a tots els components que vulguem que 
+     * interaccionin amb alguna acció (click, agafar focus,editarlos)
+     * 
+     */
+    private void initListeners() {
+        botones.getSuma().setActionCommand("+"); //textlliure
+        //que servira per saber que hem apretat aquest boto
+        botones.getSuma().addActionListener(al);
+        
+        
+        
+        
         
     }
     
