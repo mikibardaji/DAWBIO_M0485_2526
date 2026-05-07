@@ -88,7 +88,8 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         switch(accion)
         {
             case "+":
-                resultado = dao.suma(op1d, op2d);
+                sumar();
+                
                 break;
             case "-":
                 resultado = dao.resta(op1d, op2d);
@@ -139,6 +140,18 @@ public class FinestraPrincipal extends JFrame implements ActionListener{
         });*/
         
         
+        
+    }
+
+    private void sumar() {
+        String op1 = datosEntrada.getOper1Editable().getText();
+        //System.out.println(op1);
+        String op2 = datosEntrada.getOper2Editable().getText();
+        //System.out.println(op2);
+        double op1d = Double.parseDouble(op1);
+        double op2d = Double.parseDouble(op2);
+        double resultado = dao.suma(op1d, op2d);
+        datosEntrada.getResultado().setText(String.valueOf(resultado));
         
     }
     

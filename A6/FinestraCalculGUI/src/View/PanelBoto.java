@@ -14,11 +14,11 @@ import javax.swing.SwingConstants;
  * @author mabardaji
  */
 public class PanelBoto extends JPanel{ //JPÂNEL NO ES UNA FINESTRA
-    JButton suma;
-    JButton minus;
-    JButton multiply;
-    JButton divide;
-    JButton clear;
+    private JButton suma;
+    private JButton minus;
+    private JButton multiply;
+    private JButton divide;
+    private  JButton clear;
 
     public PanelBoto() {
         initComponents(); //ficar els components al layout
