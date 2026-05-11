@@ -59,17 +59,18 @@ public class FileCharRead {
 
     public List<Character> llegirTotFitxerCaracter() throws IOException
     {
-        List<Character> caractersAscii = new ArrayList<>();
+    List<Character> caractersAscii = new ArrayList<>();
+    
+    // El 'try-with-resources' assegura que el fitxer es tanqui en acabar
+    
         int i;
-        while ((i =fr.read())!= -1)
-        {
+        while ((i = fr.read()) != -1) {
             char lletra = (char) i;
-            System.out.println(lletra);
             caractersAscii.add(lletra);
         }
-        System.out.println("letras" + caractersAscii.size());
-        System.out.println(caractersAscii);
-        return caractersAscii;
+     
+    // Al final, la llista contindrà ABSOLUTAMENT TOTS els caràcters del fitxer
+    return caractersAscii;
     }
     
     public void tancarFitxer() throws IOException

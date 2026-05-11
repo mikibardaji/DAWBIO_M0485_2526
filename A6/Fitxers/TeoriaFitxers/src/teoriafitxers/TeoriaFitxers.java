@@ -28,8 +28,8 @@ public class TeoriaFitxers {
         
         //provesFile();
         //llegirFitxerCaracters();
-        escriureFitxerSortida();
-        
+        //escriureFitxerSortida();
+        copiaSeguretatFitxer();
     }
 
     private static void mostrarRutas(File f) {
@@ -105,7 +105,7 @@ public class TeoriaFitxers {
             FileCharRead ficheroLectura = new FileCharRead("FicherosPrueba\\datosEntrada.txt");
             
             
-            int ascii;
+          /*  int ascii;
             do
             {
                 ascii = ficheroLectura.llegirCaracter();
@@ -115,11 +115,11 @@ public class TeoriaFitxers {
                 }
             }while(ascii!=-1);
             System.out.println("");
-            ficheroLectura.tancarFitxer();
-//            List<Character> todoTexto = ficheroLectura.llegirTotFitxerCaracter();
-//            for (Character letra : todoTexto) {
-//                System.out.print(letra + "-");
-//            }
+            ficheroLectura.tancarFitxer();*/
+            List<Character> todoTexto = ficheroLectura.llegirTotFitxerCaracter();
+            for (Character letra : todoTexto) {
+                System.out.print(letra + "-");
+            }
             
         } catch (FileNotFoundException ex) {
             System.err.println("Fitxer no existeix");
@@ -141,6 +141,35 @@ public class TeoriaFitxers {
             }
             FileW.tancarFitxer();
             System.out.println("He escrit el fitxer salida.txt");
+        } catch (IOException ex) {
+            System.err.println("Error leyendo datos fichero entrada");
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private static void copiaSeguretatFitxer() {
+               try {
+            FileCharRead ficheroLectura = new FileCharRead("FicherosPrueba\\datosEntrada.txt");
+            FileCharWriter FileW = new FileCharWriter("FicherosPrueba\\salida2.txt");
+            
+            int ascii;
+            do
+            {
+                ascii = ficheroLectura.llegirCaracter();
+                if (ascii!=-1)
+                {
+                    FileW.EscribirCaracter((char) ascii);
+                    //System.out.print((char) ascii);
+                }
+            }while(ascii!=-1);
+            System.out.println("Fitxer copiat a FicherosPrueba\\salida2.txt");
+            ficheroLectura.tancarFitxer();
+            FileW.tancarFitxer();
+          
+            
+        } catch (FileNotFoundException ex) {
+            System.err.println("Fitxer no existeix");
+            System.out.println(ex.getMessage());
         } catch (IOException ex) {
             System.err.println("Error leyendo datos fichero entrada");
             System.out.println(ex.getMessage());
