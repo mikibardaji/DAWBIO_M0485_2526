@@ -34,7 +34,7 @@ public class FileCharRead {
     {
         return fr.read();
     }
-    
+    /*
     public List<Integer> llegirTotFitxer() throws IOException
     {
         List<Integer> caractersAscii = new ArrayList<>();
@@ -72,7 +72,7 @@ public class FileCharRead {
     // Al final, la llista contindrà ABSOLUTAMENT TOTS els caràcters del fitxer
     return caractersAscii;
     }
-    
+    */
     public void tancarFitxer() throws IOException
     {
         fr.close();

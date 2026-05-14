@@ -6,10 +6,13 @@ package teoriafitxers;
 
 import PersistenciaFitxers.FileCharRead;
 import PersistenciaFitxers.FileCharWriter;
+import PersistenciaFitxers.FileLineRead;
+import PersistenciaFitxers.FileLineWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +32,9 @@ public class TeoriaFitxers {
         //provesFile();
         //llegirFitxerCaracters();
         //escriureFitxerSortida();
-        copiaSeguretatFitxer();
+        //copiaSeguretatFitxer();
+        //lecturaFitxerLinea();
+        EscrituraFicheroLinea();
     }
 
     private static void mostrarRutas(File f) {
@@ -116,11 +121,11 @@ public class TeoriaFitxers {
             }while(ascii!=-1);
             System.out.println("");
             ficheroLectura.tancarFitxer();*/
-            List<Character> todoTexto = ficheroLectura.llegirTotFitxerCaracter();
+           /* List<Character> todoTexto = ficheroLectura.llegirTotFitxerCaracter();
             for (Character letra : todoTexto) {
                 System.out.print(letra + "-");
             }
-            
+            */
         } catch (FileNotFoundException ex) {
             System.err.println("Fitxer no existeix");
             System.out.println(ex.getMessage());
@@ -173,6 +178,50 @@ public class TeoriaFitxers {
         } catch (IOException ex) {
             System.err.println("Error leyendo datos fichero entrada");
             System.out.println(ex.getMessage());
+        }
+    }
+
+    private static void lecturaFitxerLinea() {
+        try {
+            System.out.println("Lectura fichero de linea en linea");
+            FileLineRead entradaDatos = new FileLineRead("FicherosPrueba\\datosEntrada.txt");
+            
+            List<String> lineasFichero = entradaDatos.readAllLinesFromFile();
+            for (String lineaIndividual : lineasFichero) {
+                //tratamiento individual 
+                //cambis als string
+                System.out.println(lineaIndividual);
+            }
+            System.out.println("Cerrando Ficheros");
+            entradaDatos.tancarFitxers();
+            
+            
+        } catch (FileNotFoundException ex) {
+            System.err.println("Fitxer no existeix");
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.err.println("Error leyendo datos fichero entrada");
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private static void EscrituraFicheroLinea() {
+        try {
+            FileLineWriter salidaDatos = 
+                    new FileLineWriter("FicherosPrueba\\salidaLineaLinea.txt");
+            Scanner sc = new Scanner(System.in);
+            String lineaEscrita;
+            do
+            {
+                System.out.println("Pon una linea a escribir en el fichero:");
+                lineaEscrita = sc.nextLine();
+                salidaDatos.writeLineToFile(lineaEscrita);
+            }while (!lineaEscrita.equalsIgnoreCase("SALIR"));
+            
+            salidaDatos.tancarFitxers();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(TeoriaFitxers.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
