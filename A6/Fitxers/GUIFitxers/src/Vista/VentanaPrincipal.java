@@ -22,17 +22,20 @@ import javax.swing.JMenuItem;
 public class VentanaPrincipal extends JFrame  implements ActionListener{/*actionlistener para el menu*/
     private PanelContador panel_contador;
     private PanelInici panel_inici;
+    private QuizzPanel quizz;
     ActionListener al;
     // Atributs del menú
     private JMenuBar menuBar;
     private JMenu menuNavegacio;
     private JMenuItem itemInici;
     private JMenuItem itemComptar;
+    private JMenuItem itemQuizz;
     private JMenuItem itemSortir;    
     
     public VentanaPrincipal()  {
         initwindow();
         al = this;
+        initMenu();
         initContainer();
         setVisible(true);
     }
@@ -47,13 +50,16 @@ public class VentanaPrincipal extends JFrame  implements ActionListener{/*action
 
 private void initMenu() {
         menuBar = new JMenuBar();
-        menuNavegacio = new JMenu("Menú");
+        menuNavegacio = new JMenu("Opcion");
         
         itemInici = new JMenuItem("Inici");
         itemComptar = new JMenuItem("Comptar Caràcters");
+        itemQuizz = new JMenuItem("Quizz");
         itemSortir = new JMenuItem("Sortir");
         
         // Assignem la pròpia finestra com a escoltador
+        itemQuizz.addActionListener(al);
+        itemQuizz.setActionCommand("Quizz");
         itemInici.setActionCommand("Inici");
         itemInici.addActionListener(al);
         itemComptar.setActionCommand("Comptar");
@@ -63,6 +69,7 @@ private void initMenu() {
         
         menuNavegacio.add(itemInici);
         menuNavegacio.add(itemComptar);
+        menuNavegacio.add(itemQuizz);
         menuNavegacio.add(itemSortir);
         
         menuBar.add(menuNavegacio);
@@ -118,5 +125,20 @@ private void initMenu() {
             // Lògica per intercanviar al panell del comptador
             cargarContador();
         }
+        else if (accio.equalsIgnoreCase("Quizz"))
+        {
+            cargarQuizz();
+        }
     }    
+
+    private void cargarQuizz() {
+        Container principal = getContentPane();
+        principal.removeAll();
+        principal.setLayout(new FlowLayout());
+        quizz = new QuizzPanel();
+        principal.add(quizz);
+          principal.revalidate();
+        principal.repaint();
+        
+    }
 }
